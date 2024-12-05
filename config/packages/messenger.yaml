@@ -15,10 +15,20 @@ framework:
             failed: 'doctrine://default?queue_name=failed'
             # sync: 'sync://'
 
-        default_bus: messenger.bus.default
-
         buses:
-            messenger.bus.default: []
+            messenger.bus.default: ~
+            messenger.bus.command:
+                middleware:
+                    - validation
+                    # each time a message is handled, the Doctrine connection
+                    # is "pinged" and reconnected if it's closed. Useful
+                    # if your workers run for a long time and the database
+                    # connection is sometimes lost
+                    - doctrine_ping_connection
+                    # commit or rollback transactions automatically. Useful for ACID
+                    - doctrine_transaction
+
+        default_bus: messenger.bus.default
 
         routing:
             Symfony\Component\Mailer\Messenger\SendEmailMessage: async

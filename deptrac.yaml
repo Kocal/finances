@@ -1,0 +1,26 @@
+deptrac:
+    cache_file: var/deptrac_layers.cache
+
+    paths:
+        - ./src
+
+    layers:
+        - name: Domain
+          collectors:
+              - { type: classLike, value: ^App\\.+\\Domain\\ }
+
+        - name: Application
+          collectors:
+              - { type: classLike, value: ^App\\.+\\Application\\ }
+
+        - name: Infrastructure
+          collectors:
+              - { type: classLike, value: ^App\\.+\\Infrastructure\\ }
+
+    ruleset:
+        Domain: null
+        Application:
+            - Domain
+        Infrastructure:
+            - Domain
+            - Application
