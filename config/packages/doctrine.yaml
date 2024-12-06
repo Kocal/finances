@@ -8,6 +8,13 @@ doctrine:
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
+        types:
+            bank_id: App\Infrastructure\Database\Doctrine\DBAL\Types\BankIdType
+            bank_account_id: App\Infrastructure\Database\Doctrine\DBAL\Types\BankAccountIdType
+            bank_transaction_id: App\Infrastructure\Database\Doctrine\DBAL\Types\BankTransactionIdType
+            money: App\Infrastructure\Database\Doctrine\DBAL\Types\MoneyType
+            user_id: App\Infrastructure\Database\Doctrine\DBAL\Types\UserIdType
+
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true

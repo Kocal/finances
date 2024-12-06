@@ -1,0 +1,7 @@
+proxy:
+  domains:
+    - finances
+
+workers:
+  # auto start Docker compose when starting server
+  docker_compose: ~
