@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace App\Domain\Data\Model;
 
 use App\Domain\Data\ValueObject\UserId;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use function Symfony\Component\Clock\now;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'app_user')]
@@ -26,12 +28,21 @@ class User implements UserInterface
     #[ORM\Column]
     private string $password;
 
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $createdAt;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $updatedAt;
+
+
     public static function create(string $email, string $password): self
     {
         $user = new self();
         $user->email = $email;
         $user->password = $password;
         $user->roles = ['ROLE_USER'];
+        $user->createdAt = now();
+        $user->updatedAt = $user->createdAt;
 
         return $user;
     }

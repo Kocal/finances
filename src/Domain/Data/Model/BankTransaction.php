@@ -6,8 +6,12 @@ namespace App\Domain\Data\Model;
 use App\Domain\Data\ValueObject\BankAccountId;
 use App\Domain\Data\ValueObject\BankTransactionId;
 use App\Domain\Data\ValueObject\UserId;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Money\Money;
+use Symfony\Component\Clock\Clock;
+use Symfony\Component\Clock\DatePoint;
+use function Symfony\Component\Clock\now;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'bank_transaction')]
@@ -24,18 +28,34 @@ class BankTransaction
     #[ORM\Column(type: 'money')]
     private Money $amount;
 
-    public function __construct()
+    #[ORM\Column(type: Types::STRING)]
+    private string $label;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $date;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $createdAt;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $updatedAt;
+
+    private function __construct()
     {
         $this->id = BankTransactionId::generate();
     }
 
-    public static function create(BankAccountId $bankAccountId, Money $amount): self
+    public static function create(BankAccountId $bankAccountId, Money $amount, string $label, \DateTimeImmutable $date): self
     {
-        $bankAccount = new self();
-        $bankAccount->bankAccountId = $bankAccountId;
-        $bankAccount->amount = $amount;
+        $bankTransaction = new self();
+        $bankTransaction->bankAccountId = $bankAccountId;
+        $bankTransaction->amount = $amount;
+        $bankTransaction->label = $label;
+        $bankTransaction->date = $date;
+        $bankTransaction->createdAt = now();
+        $bankTransaction->updatedAt = $bankTransaction->createdAt;
 
-        return $bankAccount;
+        return $bankTransaction;
     }
 
     public function getId(): BankTransactionId

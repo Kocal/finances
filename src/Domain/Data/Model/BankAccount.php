@@ -5,7 +5,9 @@ namespace App\Domain\Data\Model;
 
 use App\Domain\Data\ValueObject\BankAccountId;
 use App\Domain\Data\ValueObject\UserId;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use function Symfony\Component\Clock\now;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'bank_account')]
@@ -19,15 +21,28 @@ class BankAccount
     #[ORM\Column(type: 'user_id')]
     private UserId $userId;
 
-    public function __construct()
+    #[ORM\Column(type: 'string')]
+    private string $label;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $createdAt;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $updatedAt;
+
+
+    private function __construct()
     {
         $this->id = BankAccountId::generate();
     }
 
-    public static function create(UserId $userId): self
+    public static function create(UserId $userId, string $label): self
     {
         $bankAccount = new self();
         $bankAccount->userId = $userId;
+        $bankAccount->label = $label;
+        $bankAccount->createdAt = now();
+        $bankAccount->updatedAt = $bankAccount->createdAt;
 
         return $bankAccount;
     }

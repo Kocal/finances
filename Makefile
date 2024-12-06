@@ -9,3 +9,7 @@ db-reset:
 	$(CONSOLE) doctrine:database:create
 	$(CONSOLE) doctrine:schema:create
 	$(CONSOLE) doctrine:fixtures:load --no-interaction
+
+.PHONY: db-reset@test
+db-reset@test: APP_ENV=test
+db-reset@test: db-reset
