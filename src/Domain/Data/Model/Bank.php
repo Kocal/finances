@@ -17,24 +17,20 @@ class Bank
     #[ORM\Column(type: 'bank_id')]
     private BankId $id;
 
-    #[ORM\Column(type: 'string', unique: true)]
-    private string $name;
-
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $updatedAt;
 
-    public function __construct()
+    private function __construct(BankId $id)
     {
-        $this->id = BankId::generate();
+        $this->id = $id;
     }
 
-    public static function create(string $name): self
+    public static function create(BankId $id): self
     {
-        $bank = new self();
-        $bank->name = $name;
+        $bank = new self($id);
         $bank->createdAt = now();
         $bank->updatedAt = $bank->createdAt;
 
@@ -44,10 +40,5 @@ class Bank
     public function getId(): BankId
     {
         return $this->id;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

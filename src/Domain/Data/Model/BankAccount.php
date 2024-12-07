@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Domain\Data\Model;
 
 use App\Domain\Data\ValueObject\BankAccountId;
+use App\Domain\Data\ValueObject\BankId;
 use App\Domain\Data\ValueObject\UserId;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,6 +22,9 @@ class BankAccount
     #[ORM\Column(type: 'user_id')]
     private UserId $userId;
 
+    #[ORM\Column(type: 'bank_id')]
+    private BankId $bankId;
+
     #[ORM\Column(type: 'string')]
     private string $label;
 
@@ -30,16 +34,16 @@ class BankAccount
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $updatedAt;
 
-
     private function __construct()
     {
         $this->id = BankAccountId::generate();
     }
 
-    public static function create(UserId $userId, string $label): self
+    public static function create(UserId $userId, BankId $bankId, string $label): self
     {
         $bankAccount = new self();
         $bankAccount->userId = $userId;
+        $bankAccount->bankId = $bankId;
         $bankAccount->label = $label;
         $bankAccount->createdAt = now();
         $bankAccount->updatedAt = $bankAccount->createdAt;
@@ -55,5 +59,15 @@ class BankAccount
     public function getUserId(): UserId
     {
         return $this->userId;
+    }
+
+    public function getBankId(): BankId
+    {
+        return $this->bankId;
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label;
     }
 }

@@ -5,12 +5,10 @@ namespace App\Domain\Data\Model;
 
 use App\Domain\Data\ValueObject\BankAccountId;
 use App\Domain\Data\ValueObject\BankTransactionId;
-use App\Domain\Data\ValueObject\UserId;
+use App\Domain\Data\ValueObject\BankTransactionType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Money\Money;
-use Symfony\Component\Clock\Clock;
-use Symfony\Component\Clock\DatePoint;
 use function Symfony\Component\Clock\now;
 
 #[ORM\Entity]
@@ -31,6 +29,9 @@ class BankTransaction
     #[ORM\Column(type: Types::STRING)]
     private string $label;
 
+    #[ORM\Column(type: Types::STRING, enumType: BankTransactionType::class)]
+    private BankTransactionType $type = BankTransactionType::UNKNOWN;
+
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $date;
 
@@ -45,13 +46,19 @@ class BankTransaction
         $this->id = BankTransactionId::generate();
     }
 
-    public static function create(BankAccountId $bankAccountId, Money $amount, string $label, \DateTimeImmutable $date): self
-    {
+    public static function create(
+        BankAccountId $bankAccountId,
+        Money $amount,
+        string $label,
+        \DateTimeImmutable $date,
+        BankTransactionType $type,
+    ): self {
         $bankTransaction = new self();
         $bankTransaction->bankAccountId = $bankAccountId;
         $bankTransaction->amount = $amount;
         $bankTransaction->label = $label;
         $bankTransaction->date = $date;
+        $bankTransaction->type = $type;
         $bankTransaction->createdAt = now();
         $bankTransaction->updatedAt = $bankTransaction->createdAt;
 
@@ -71,5 +78,28 @@ class BankTransaction
     public function getAmount(): Money
     {
         return $this->amount;
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    public function getDate(): \DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    public function defineType(BankTransactionType $type): self
+    {
+        $this->type = $type;
+        $this->updatedAt = now();
+
+        return $this;
+    }
+
+    public function getType(): BankTransactionType
+    {
+        return $this->type;
     }
 }

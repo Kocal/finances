@@ -11,5 +11,5 @@ db-reset:
 	$(CONSOLE) doctrine:fixtures:load --no-interaction
 
 .PHONY: db-reset@test
-db-reset@test: APP_ENV=test
+db-reset@test: export APP_ENV=test
 db-reset@test: db-reset

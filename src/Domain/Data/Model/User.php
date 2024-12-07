@@ -6,13 +6,14 @@ namespace App\Domain\Data\Model;
 use App\Domain\Data\ValueObject\UserId;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use function Symfony\Component\Clock\now;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'app_user')]
-#[ORM\Index(columns: ['email'])]
-class User implements UserInterface
+#[ORM\Index(columns: ['username'])]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
@@ -20,7 +21,7 @@ class User implements UserInterface
     private UserId $id;
 
     #[ORM\Column(length: 180, unique: true)]
-    private string $email;
+    private string $username;
 
     #[ORM\Column]
     private array $roles = [];
@@ -35,10 +36,10 @@ class User implements UserInterface
     private \DateTimeImmutable $updatedAt;
 
 
-    public static function create(string $email, string $password): self
+    public static function create(UserId $id, string $username, string $password): self
     {
-        $user = new self();
-        $user->email = $email;
+        $user = new self($id);
+        $user->username = $username;
         $user->password = $password;
         $user->roles = ['ROLE_USER'];
         $user->createdAt = now();
@@ -47,17 +48,17 @@ class User implements UserInterface
         return $user;
     }
 
-    public static function createAdmin(string $email, string $password): self
+    public static function createAdmin(UserId $id, string $username, string $password): self
     {
-        $user = self::create($email, $password);
+        $user = self::create($id,$username, $password);
         $user->roles = ['ROLE_ADMIN'];
 
         return $user;
     }
 
-    public function __construct()
+    private function __construct(UserId $id)
     {
-        $this->id = UserId::generate();
+        $this->id = $id;
     }
 
     public function getId(): UserId
@@ -65,19 +66,12 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
     /**
-     * A visual identifier that represents this user.
-     *
      * @see UserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return $this->username;
     }
 
     /**
