@@ -6,5 +6,5 @@ namespace App\Application\CQRS;
 
 interface CommandBus
 {
-    public function dispatch(object $command): mixed;
+    public function handle(object $command): mixed;
 }

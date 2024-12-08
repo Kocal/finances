@@ -16,9 +16,16 @@ services:
     App\:
         resource: '../src/'
         exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
             - '../src/Kernel.php'
+            - '../src/Application/CQRS/Command.php'
+            - '../src/Domain/Exception'
+            - '../src/Domain/Data/*.php'
+            - '../src/Domain/Data/{Model,ValueObject}/**/*.php'
+            - '../src/Domain/BankTransactions/DumpParsing/Strategy/Strategy.php'
+            - '../src/Infrastructure/Database/Doctrine/DBAL/Types/**/*.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Domain\UseCase\:
+        resource: '../src/Domain/UseCase/**/Handler.php'
+        tags:
+            - name: 'messenger.message_handler'
+              bus: 'messenger.bus.command'
