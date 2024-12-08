@@ -6,7 +6,7 @@ namespace App\Infrastructure\Database\Doctrine\DBAL\Types;
 
 use App\Domain\Data\ValueObject\BankTransactionId;
 
-final class BankTransactionIdType extends AbstractIdType
+final class BankTransactionIdType extends AbstractUuidType
 {
     public const string NAME = 'bank_transaction_id';
 

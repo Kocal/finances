@@ -26,12 +26,12 @@ final class BankAccountFixtures extends Fixture
 
         BankAccountFactory::createSequence([
             [
-                'bankId' => BankId::fromString(BankFixtures::CAISSE_EPARGNE),
+                'bankId' => BankId::CAISSE_EPARGNE,
                 'userId' => UserId::fromString(UserFixtures::CLARA),
                 'label' => 'Compte courant',
             ],
             [
-                'bankId' => BankId::fromString(BankFixtures::CREDIT_FONCIER),
+                'bankId' => BankId::CREDIT_FONCIER,
                 'userId' => UserId::fromString(UserFixtures::DONNA),
                 'label' => 'Compte courant',
             ],

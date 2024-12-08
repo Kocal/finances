@@ -6,7 +6,7 @@ namespace App\Domain\Data\ValueObject;
 
 use App\Domain\Data\UuidTrait;
 
-final class BankAccountId implements Id
+final class BankAccountId implements Uuid
 {
     use UuidTrait;
 }
