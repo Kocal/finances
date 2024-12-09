@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Func;
 
+use App\Application\CQRS\Command;
+use App\Application\CQRS\CommandBus;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -49,5 +51,26 @@ abstract class FunctionalTestCase extends WebTestCase
             $files,
             $headers,
         );
+    }
+
+    /**
+     * @template T
+     * @param class-string<T> $class
+     * @return object<T>
+     */
+    protected function getService(string $class): object
+    {
+        $service = self::getContainer()->get($class);
+
+        self::assertInstanceOf($class, $service);
+
+        return $service;
+    }
+
+    protected function handleCommand(Command $command): mixed
+    {
+        $commandBus = self::getService(CommandBus::class);
+
+        return $commandBus->handle($command);
     }
 }

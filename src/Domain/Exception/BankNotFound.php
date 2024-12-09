@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Exception;
 
-use App\Domain\Data\ValueObject\BankAccountId;
 use App\Domain\Data\ValueObject\BankId;
 
-final  class BankNotFound extends \RuntimeException
+final class BankNotFound extends DomainException
 {
     public static function byId(BankId $bankId): self
     {

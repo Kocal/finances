@@ -34,14 +34,14 @@ class BankAccount
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $updatedAt;
 
-    private function __construct()
+    private function __construct(BankAccountId $id)
     {
-        $this->id = BankAccountId::generate();
+        $this->id = $id;
     }
 
-    public static function create(UserId $userId, BankId $bankId, string $label): self
+    public static function create(BankAccountId $id, UserId $userId, BankId $bankId, string $label): self
     {
-        $bankAccount = new self();
+        $bankAccount = new self($id);
         $bankAccount->userId = $userId;
         $bankAccount->bankId = $bankId;
         $bankAccount->label = $label;

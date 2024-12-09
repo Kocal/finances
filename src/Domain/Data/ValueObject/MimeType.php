@@ -3,12 +3,31 @@ declare(strict_types=1);
 
 namespace App\Domain\Data\ValueObject;
 
-enum MimeType: string
-{
-    case CSV = 'text/csv';
+use function Symfony\Component\String\s;
 
-    public function equals(MimeType $mimeType): bool
+class MimeType
+{
+    private string $value;
+
+    public static function fromString(string $value): self
     {
-        return $this->value === $mimeType->value;
+        return new self(s($value)->lower()->trim()->toString());
+    }
+
+    private function __construct(string $value)
+    {
+        $this->value = $value;
+    }
+
+    public function toString(): string
+    {
+        return $this->value;
+    }
+
+    public function isCsv(): bool
+    {
+        return in_array($this->value, [
+            'text/csv',
+        ], true);
     }
 }

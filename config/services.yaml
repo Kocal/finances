@@ -21,11 +21,16 @@ services:
             - '../src/Domain/Exception'
             - '../src/Domain/Data/*.php'
             - '../src/Domain/Data/{Model,ValueObject}/**/*.php'
-            - '../src/Domain/BankTransactions/DumpParsing/Strategy/Strategy.php'
             - '../src/Infrastructure/Database/Doctrine/DBAL/Types/**/*.php'
 
     App\Domain\UseCase\:
         resource: '../src/Domain/UseCase/**/Handler.php'
         tags:
             - name: 'messenger.message_handler'
-              bus: 'messenger.bus.command'
+              bus: 'messenger.bus.transactional'
+
+    App\Application\Controller\Public\:
+        resource: '../src/Application/Controller/Public/**/Action.php'
+        public: true
+        tags:
+            - name: 'controller.service_arguments'

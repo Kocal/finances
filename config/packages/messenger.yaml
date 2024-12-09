@@ -17,7 +17,7 @@ framework:
 
         buses:
             messenger.bus.default: ~
-            messenger.bus.command:
+            messenger.bus.transactional:
                 middleware:
                     - validation
                     # each time a message is handled, the Doctrine connection

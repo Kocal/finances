@@ -3,19 +3,20 @@ declare(strict_types=1);
 
 namespace App\Domain\BankTransactions\DumpParsing\Strategy;
 
-use App\Domain\Data\Model\Bank;
-use App\Domain\Data\Model\BankAccount;
-use App\Domain\Data\Model\BankTransaction;
+use App\Domain\Data\Model\ParsedBankTransaction;
+use App\Domain\Data\ValueObject\BankId;
 use App\Domain\Data\ValueObject\BankTransactions\UserDump;
+use App\Domain\Exception\DumpParsingException;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag]
 interface Strategy
 {
-    public function supports(Bank $bank, UserDump $dump): bool;
+    public function supports(BankId $bankId, UserDump $dump): bool;
 
     /**
-     * @return iterable<BankTransaction>
+     * @throws DumpParsingException
+     * @return array<ParsedBankTransaction>
      */
-    public function parse(Bank $bank, BankAccount $bankAccount, UserDump $dump): iterable;
+    public function parse(UserDump $dump): iterable;
 }

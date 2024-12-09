@@ -7,7 +7,6 @@ use App\Domain\Data\Model\BankTransaction;
 use App\Domain\Data\Repository\BankTransactionRepository;
 use App\Domain\Data\ValueObject\BankAccountId;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
