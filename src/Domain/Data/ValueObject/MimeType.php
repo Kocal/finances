@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\Data\ValueObject;
@@ -9,14 +10,14 @@ class MimeType
 {
     private string $value;
 
-    public static function fromString(string $value): self
-    {
-        return new self(s($value)->lower()->trim()->toString());
-    }
-
     private function __construct(string $value)
     {
         $this->value = $value;
+    }
+
+    public static function fromString(string $value): self
+    {
+        return new self(s($value)->lower()->trim()->toString());
     }
 
     public function toString(): string

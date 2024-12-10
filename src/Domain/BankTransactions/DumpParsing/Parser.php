@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\BankTransactions\DumpParsing;
@@ -12,10 +13,10 @@ use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 final readonly class Parser
 {
+    /**
+     * @param iterable<Strategy> $strategies
+     */
     public function __construct(
-        /**
-         * @param iterable<Strategy> $strategies
-         */
         #[AutowireIterator(Strategy::class)]
         private iterable $strategies,
     ) {

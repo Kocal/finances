@@ -1,17 +1,19 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Database\Doctrine\ORM\Repository;
 
 use App\Domain\Data\Model\Bank;
-use App\Domain\Data\Model\BankAccount;
 use App\Domain\Data\Repository\BankRepository;
-use App\Domain\Data\ValueObject\BankAccountId;
 use App\Domain\Data\ValueObject\BankId;
 use App\Domain\Exception\BankNotFound;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Bank>
+ */
 final class BankDoctrineORMRepository extends ServiceEntityRepository implements BankRepository
 {
     public function __construct(ManagerRegistry $registry)

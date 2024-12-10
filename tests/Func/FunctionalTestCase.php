@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Func;
@@ -29,11 +30,12 @@ abstract class FunctionalTestCase extends WebTestCase
 
     protected static function createClient(array $options = [], array $server = []): KernelBrowser
     {
-        return parent::createClient($options, $server + ['HTTPS' => true]);
+        return parent::createClient($options, $server + [
+            'HTTPS' => true,
+        ]);
     }
 
     /**
-     * @param string $url
      * @param array<string, mixed> $formData
      * @param array<string,UploadedFile> $files
      * @param $headers<string, string|array<string>> $headers
@@ -42,7 +44,9 @@ abstract class FunctionalTestCase extends WebTestCase
         string $url,
         array $formData = [],
         array $files = [],
-        $headers = ['Content-Type' => 'multipart/form-data'],
+        $headers = [
+            'Content-Type' => 'multipart/form-data',
+        ],
     ): void {
         self::$client->request(
             'POST',

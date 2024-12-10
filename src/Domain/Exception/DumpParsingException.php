@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\Exception;
@@ -18,8 +19,13 @@ final class DumpParsingException extends DomainException
         return new self(\sprintf('Unsupported currency "%s".', $currency));
     }
 
-    public static function unsupportedDumpForBankAndType(BankId $getBankId, MimeType $mimeType)
+    public static function unsupportedDumpForBankAndType(BankId $getBankId, MimeType $mimeType): self
     {
         return new self(\sprintf('Unsupported dump for bank "%s" and type "%s".', $getBankId->toString(), $mimeType->toString()));
+    }
+
+    public static function unableToParseDate(mixed $int, string $dateFormat): self
+    {
+        return new self(\sprintf('Unable to parse date "%s" when using format "%s".', $int, $dateFormat));
     }
 }

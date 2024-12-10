@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\BankTransactions\DumpParsing\Strategy\LaBanquePostale;
@@ -8,7 +9,6 @@ use App\Domain\Data\Model\ParsedBankTransaction;
 use App\Domain\Data\ValueObject\BankId;
 use App\Domain\Data\ValueObject\BankTransactions\UserDump;
 use App\Domain\Exception\DumpParsingException;
-use DateTimeImmutable;
 use Money\Currency;
 use Money\Money;
 use Override;
@@ -25,8 +25,7 @@ final readonly class CsvStrategy implements Strategy
 
     public function __construct(
         private DecoderInterface $decoder,
-    )
-    {
+    ) {
     }
 
     public function supports(BankId $bankId, UserDump $dump): bool
@@ -47,7 +46,7 @@ final readonly class CsvStrategy implements Strategy
     private function extractCurrency(UserDump $dump): Currency
     {
         $matches = s($dump->content)->match(self::FR_CURRENCY_REGEX);
-        if (!isset($matches['currency'])) {
+        if (! isset($matches['currency'])) {
             throw DumpParsingException::unableToGuessCurrency();
         }
 
@@ -77,7 +76,7 @@ final readonly class CsvStrategy implements Strategy
             CsvEncoder::NO_HEADERS_KEY => true,
         ]);
 
-        $numberFormatter = match($currency->getCode()) {
+        $numberFormatter = match ($currency->getCode()) {
             'EUR' => new \NumberFormatter('fr_FR', \NumberFormatter::DECIMAL),
             default => throw DumpParsingException::unsupportedCurrency($currency->getCode()),
         };
@@ -89,8 +88,13 @@ final readonly class CsvStrategy implements Strategy
                 continue;
             }
 
+            $date = \DateTimeImmutable::createFromFormat($dateFormat = 'd/m/Y', $row[0]);
+            if ($date === false) {
+                throw DumpParsingException::unableToParseDate($row[0], $dateFormat);
+            }
+
             $transactions[] = new ParsedBankTransaction(
-                date: \DateTimeImmutable::createFromFormat('d/m/Y', $row[0])->setTime(0, 0),
+                date: $date->setTime(0, 0),
                 label: s($row[1])->trim()->toString(),
                 money: new Money((int) ($numberFormatter->parse($row[2]) * 100), $currency),
             );

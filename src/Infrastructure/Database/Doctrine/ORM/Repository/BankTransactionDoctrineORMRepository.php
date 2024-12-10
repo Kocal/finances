@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Database\Doctrine\ORM\Repository;
@@ -22,7 +23,7 @@ final class BankTransactionDoctrineORMRepository extends ServiceEntityRepository
     public function findByBankAccount(BankAccountId $bankAccountId): array
     {
         return $this->findBy([
-            'bankAccountId' => $bankAccountId
+            'bankAccountId' => $bankAccountId,
         ]);
     }
 

@@ -6,5 +6,8 @@ namespace App\Application\CQRS;
 
 interface CommandBus
 {
-    public function handle(object $command): mixed;
+    /**
+     * Handle a command synchronously.
+     */
+    public function handle(Command $command): mixed;
 }

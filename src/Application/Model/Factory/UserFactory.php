@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Model\Factory;
 
 use App\Domain\Data\Model\User;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
-use Zenstruck\Foundry\Object\Instantiator;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -26,8 +27,11 @@ final class UserFactory extends PersistentProxyObjectFactory
         return User::class;
     }
 
-    public function admin(): self {
-        return $this->with(['_admin' => true]);
+    public function admin(): self
+    {
+        return $this->with([
+            '_admin' => true,
+        ]);
     }
 
     protected function defaults(): array|callable
@@ -45,15 +49,15 @@ final class UserFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            ->beforeInstantiate(function(array $attributes): array {
-                if (!isset($attributes['password'])) {
+            ->beforeInstantiate(function (array $attributes): array {
+                if (! isset($attributes['password'])) {
                     $attributes['password'] = $this->passwordHasher->hash($attributes['plainPassword']);
                     unset($attributes['plainPassword']);
                 }
 
                 return $attributes;
             })
-            ->instantiateWith(function(array $attributes) {
+            ->instantiateWith(function (array $attributes) {
                 $admin = $attributes['_admin'];
                 unset($attributes['_admin']);
 

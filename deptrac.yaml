@@ -7,15 +7,15 @@ deptrac:
     layers:
         - name: Domain
           collectors:
-          value: src/Domain/.*
+            - { type: directory, value: src/Domain/.* }
 
         - name: Application
           collectors:
-          value: src/Application/(?!(CQRS/Command\.php)).*
+            - { type: directory, value: src/Application/(?!(CQRS/Command\.php)).* }
 
         - name: Infrastructure
           collectors:
-          value: src/Infrastructure/.*
+            - { type: directory, value: src/Infrastructure/.* }
 
     ruleset:
         Domain: null

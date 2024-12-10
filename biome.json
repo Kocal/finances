@@ -1,0 +1,14 @@
+{
+	"files": {
+		"ignore": [
+			"assets/vendor/*",
+			"assets/controllers.json",
+			"assets/controllers/csrf_protection_controller.js",
+			"composer.json",
+			"public/assets/*",
+			"public/bundles/*",
+			"var/cache/*",
+			"vendor/*"
+		]
+	}
+}

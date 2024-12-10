@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Application\Model\DataFixtures;
@@ -14,6 +15,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 final class BankAccountFixtures extends Fixture
 {
     public const CAISSE_EPARGNE_CLARA = '0193a7d5-ac83-749d-b8a9-e8e305b4344d';
+
     public const LA_BANQUE_POSTALE_DONNA = '0193a7d5-ac83-7360-8c30-e64a169b1fcc';
 
     public function __construct(

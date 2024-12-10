@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\Data\Model;
@@ -20,9 +21,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'user_id')]
     private UserId $id;
 
+    /**
+     * @var non-empty-string
+     */
     #[ORM\Column(length: 180, unique: true)]
     private string $username;
 
+    /**
+     * @var string[]
+     */
     #[ORM\Column]
     private array $roles = [];
 
@@ -35,7 +42,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $updatedAt;
 
+    private function __construct(UserId $id)
+    {
+        $this->id = $id;
+    }
 
+    /**
+     * @param non-empty-string $username
+     * @param non-empty-string $password
+     */
     public static function create(UserId $id, string $username, string $password): self
     {
         $user = new self($id);
@@ -48,17 +63,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $user;
     }
 
+    /**
+     * @param non-empty-string $username
+     * @param non-empty-string $password
+     */
     public static function createAdmin(UserId $id, string $username, string $password): self
     {
-        $user = self::create($id,$username, $password);
+        $user = self::create($id, $username, $password);
         $user->roles = ['ROLE_ADMIN'];
 
         return $user;
-    }
-
-    private function __construct(UserId $id)
-    {
-        $this->id = $id;
     }
 
     public function getId(): UserId
@@ -75,7 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @see UserInterface
+     * @return string[]
      */
     public function getRoles(): array
     {

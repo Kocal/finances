@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Database\Doctrine\ORM\Repository;
@@ -11,6 +12,9 @@ use App\Domain\Exception\BankAccountNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<BankAccount>
+ */
 final class BankAccountDoctrineORMRepository extends ServiceEntityRepository implements BankAccountRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -18,13 +22,13 @@ final class BankAccountDoctrineORMRepository extends ServiceEntityRepository imp
         parent::__construct($registry, BankAccount::class);
     }
 
-    public function get(BankAccountId $bankAccountId)
+    public function get(BankAccountId $bankAccountId): BankAccount
     {
         return $this->find($bankAccountId) ?? throw BankAccountNotFoundException::byId($bankAccountId);
     }
 
     public function save(Bank $bank): void
     {
-        // TODO: Implement save() method.
+        $this->getEntityManager()->persist($bank);
     }
 }

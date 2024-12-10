@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Bus;
 
+use App\Application\CQRS\Command;
 use App\Application\CQRS\CommandBus;
 
 final class SymfonyMessengerCommandBus implements CommandBus
@@ -13,7 +14,7 @@ final class SymfonyMessengerCommandBus implements CommandBus
     ) {
     }
 
-    public function handle(object $command): mixed
+    public function handle(Command $command): mixed
     {
         return $this->transactionalBus->handle($command);
     }

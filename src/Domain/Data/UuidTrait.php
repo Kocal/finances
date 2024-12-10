@@ -63,7 +63,7 @@ trait UuidTrait
         return $this->uuid->toBinary();
     }
 
-    public function equals(\App\Domain\Data\ValueObject\Uuid $to): bool
+    public function equals(self $to): bool
     {
         return $this->uuid->equals($to->uuid());
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\Data\Repository;
@@ -13,7 +14,7 @@ interface BankAccountRepository
     /**
      * @throws BankAccountNotFoundException
      */
-    public function get(BankAccountId $bankAccountId);
+    public function get(BankAccountId $bankAccountId): BankAccount;
 
     public function save(Bank $bank): void;
 }

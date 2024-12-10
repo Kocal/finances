@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Model\Factory;
 
 use App\Domain\Data\Model\Bank;

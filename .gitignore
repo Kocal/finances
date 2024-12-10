@@ -1,5 +1,7 @@
-
 ###> symfony/framework-bundle ###
+/bin/*
+!/bin/console
+!/bin/php.sh
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -14,11 +16,6 @@
 .phpunit.result.cache
 ###< phpunit/phpunit ###
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
-
 ###> symfony/asset-mapper ###
 /public/assets/
 /assets/vendor/
@@ -27,3 +24,11 @@
 ###> qossmic/deptrac ###
 /.deptrac.cache
 ###< qossmic/deptrac ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
+
+###> vincentlanglet/twig-cs-fixer ###
+/.twig-cs-fixer.cache
+###< vincentlanglet/twig-cs-fixer ###

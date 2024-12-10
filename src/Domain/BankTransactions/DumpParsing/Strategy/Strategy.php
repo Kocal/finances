@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\BankTransactions\DumpParsing\Strategy;
@@ -18,5 +19,5 @@ interface Strategy
      * @throws DumpParsingException
      * @return array<ParsedBankTransaction>
      */
-    public function parse(UserDump $dump): iterable;
+    public function parse(UserDump $dump): array;
 }

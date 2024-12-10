@@ -1,0 +1,37 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Dead catch \- Throwable is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 1
+			path: src/Application/Controller/Public/ImportBankTransactionsDump/Action.php
+
+		-
+			message: '#^Property App\\Application\\Controller\\Public\\ImportBankTransactionsDump\\Action\:\:\$commandBus is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Application/Controller/Public/ImportBankTransactionsDump/Action.php
+
+		-
+			message: '#^Method App\\Application\\Model\\Factory\\BankAccountFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Application/Model/Factory/BankAccountFactory.php
+
+		-
+			message: '#^Method App\\Application\\Model\\Factory\\BankFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Application/Model/Factory/BankFactory.php
+
+		-
+			message: '#^Method App\\Application\\Model\\Factory\\UserFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Application/Model/Factory/UserFactory.php
+
+		-
+			message: '#^Parameter \#1 \$instantiator of method Zenstruck\\Foundry\\ObjectFactory\<App\\Domain\\Data\\Model\\User&Zenstruck\\Foundry\\Persistence\\Proxy\<App\\Domain\\Data\\Model\\User\>\>\:\:instantiateWith\(\) expects \(callable\(array\<string, mixed\>, class\-string\<App\\Domain\\Data\\Model\\User&Zenstruck\\Foundry\\Persistence\\Proxy\<App\\Domain\\Data\\Model\\User\>\>\)\: \(App\\Domain\\Data\\Model\\User&Zenstruck\\Foundry\\Persistence\\Proxy\<App\\Domain\\Data\\Model\\User\>\)\)\|Zenstruck\\Foundry\\Object\\Instantiator, Closure\(array\)\: App\\Domain\\Data\\Model\\User given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Application/Model/Factory/UserFactory.php

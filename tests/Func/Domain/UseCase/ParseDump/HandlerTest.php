@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Func\Domain\UseCase\ParseDump;
@@ -15,7 +16,7 @@ use App\Tests\Func\FunctionalTestCase;
 use Money\Money;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class HandlerTestCase extends FunctionalTestCase
+final class HandlerTest extends FunctionalTestCase
 {
     private ParseDump\Handler $handler;
 
@@ -44,7 +45,7 @@ final class HandlerTestCase extends FunctionalTestCase
     {
         yield 'LaBanquePostale CSV' => [
             BankAccountId::fromString(BankAccountFixtures::LA_BANQUE_POSTALE_DONNA),
-            __DIR__.'/../../../../Resources/BankTransactionsDump/LaBanquePostale-CSV-1.csv',
+            __DIR__ . '/../../../../Resources/BankTransactionsDump/LaBanquePostale-CSV-1.csv',
             [
                 new ParsedBankTransaction(new \DateTimeImmutable('2024-12-05 00:00:00'), 'ACHAT CB CFTA RHONE     04.12.24 CARTE NUMERO                458  ', Money::EUR(-2910)),
                 new ParsedBankTransaction(new \DateTimeImmutable('2024-12-05 00:00:00'), 'ACHAT CB BURGER KING    04.12.24 EUR         18,30 CARTE NO  458 APPLE PAY ', Money::EUR(-1830)),
@@ -57,9 +58,10 @@ final class HandlerTestCase extends FunctionalTestCase
                 new ParsedBankTransaction(new \DateTimeImmutable('2024-11-25 00:00:00'), 'ACHAT CB  CUMUL         23.11.24 EUR          4,00 CARTE NO  458  ', Money::EUR(-400)),
                 new ParsedBankTransaction(new \DateTimeImmutable('2024-11-25 00:00:00'), 'ACHAT CB BHN            23.11.24 EUR          1,50 CARTE NO  458 APPLE PAY ', Money::EUR(-150)),
                 new ParsedBankTransaction(new \DateTimeImmutable('2024-10-30 00:00:00'), 'CREDIT CARTE BANCAIRE AMAZON PRIME FR 29.10.24 CARTE NUMERO                458 ', Money::EUR(6990)),
-            ]
+            ],
         ];
     }
+
     /**
      * @dataProvider provideFailingImport
      */
@@ -84,7 +86,7 @@ final class HandlerTestCase extends FunctionalTestCase
     {
         yield 'unsupported bank' => [
             BankAccountId::fromString(BankAccountFixtures::CAISSE_EPARGNE_CLARA),
-            __DIR__.'/../../../../Resources/BankTransactionsDump/UnsupportedBank-CSV-1.csv',
+            __DIR__ . '/../../../../Resources/BankTransactionsDump/UnsupportedBank-CSV-1.csv',
             DumpParsingException::unsupportedDumpForBankAndType(BankId::CAISSE_EPARGNE, MimeType::fromString('text/plain')),
         ];
     }
