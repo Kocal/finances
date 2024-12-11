@@ -25,4 +25,8 @@ return [
     '@hotwired/turbo' => [
         'version' => '7.3.0',
     ],
+    'inter-ui/inter-variable.css' => [
+        'version' => '4.1.0',
+        'type' => 'css',
+    ],
 ];

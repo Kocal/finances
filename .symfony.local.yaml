@@ -5,3 +5,6 @@ proxy:
 workers:
   # auto start Docker compose when starting server
   docker_compose: ~
+
+  tailwind_watch:
+    cmd: ['symfony', 'console', 'tailwind:build', '--watch']
