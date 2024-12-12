@@ -180,7 +180,8 @@ test: test.back
 
 ## Tests - Run backend tests
 test.back:
-	$(PHP) vendor/bin/phpunit
+	$(PHP) vendor/bin/phpunit --group smoke
+	$(PHP) vendor/bin/phpunit --exclude-group smoke
 
 ## Tests - Run backend tests with coverage
 test.back.coverage:

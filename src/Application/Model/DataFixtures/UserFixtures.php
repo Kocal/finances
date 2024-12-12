@@ -36,21 +36,21 @@ final class UserFixtures extends Fixture
             ->admin()
             ->create([
                 'id' => UserId::fromString(self::ADMIN),
-                'username' => 'admin',
+                'email' => 'admin@example.net',
             ]);
 
         UserFactory::createSequence([
             [
                 'id' => UserId::fromString(self::ROSE),
-                'username' => 'rose',
+                'email' => 'rose@example.net',
             ],
             [
                 'id' => UserId::fromString(self::DONNA),
-                'username' => 'donna',
+                'email' => 'donna@example.net',
             ],
             [
                 'id' => UserId::fromString(self::CLARA),
-                'username' => 'clara',
+                'email' => 'clara@example.net',
             ],
         ]);
     }

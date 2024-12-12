@@ -8,6 +8,7 @@ use App\Application\CQRS\Command;
 use App\Application\CQRS\CommandBus;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 abstract class FunctionalTestCase extends WebTestCase
@@ -35,6 +36,25 @@ abstract class FunctionalTestCase extends WebTestCase
         ]);
     }
 
+    protected function get(
+        string $uri,
+        array $parameters = [],
+        array $files = [],
+        array $server = [],
+        ?string $content = null,
+        bool $changeHistory = true
+    ): Crawler {
+        return self::$client->request(
+            method: 'GET',
+            uri: $uri,
+            parameters: $parameters,
+            files: $files,
+            server: $server,
+            content: $content,
+            changeHistory: $changeHistory
+        );
+    }
+
     /**
      * @param array<string, mixed> $formData
      * @param array<string,UploadedFile> $files
@@ -55,6 +75,16 @@ abstract class FunctionalTestCase extends WebTestCase
             $files,
             $headers,
         );
+    }
+
+    protected function submitForm(string $button, array $fieldValues = [], string $method = 'POST', array $serverParameters = []): Crawler
+    {
+        return self::$client->submitForm($button, $fieldValues, $method, $serverParameters);
+    }
+
+    protected function followRedirect(): Crawler
+    {
+        return self::$client->followRedirect();
     }
 
     /**

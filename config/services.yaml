@@ -21,6 +21,7 @@ services:
             - '../src/Domain/Exception'
             - '../src/Domain/Data/*.php'
             - '../src/Domain/Data/{Model,ValueObject}/**/*.php'
+            - '../src/Domain/UseCase/**/{Input,Output}.php'
             - '../src/Infrastructure/Database/Doctrine/DBAL/Types/**/*.php'
 
     App\Domain\UseCase\:

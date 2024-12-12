@@ -9,6 +9,7 @@ doctrine:
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
         types:
+            email: App\Infrastructure\Database\Doctrine\DBAL\Types\EmailType
             bank_id: App\Infrastructure\Database\Doctrine\DBAL\Types\BankIdType
             bank_account_id: App\Infrastructure\Database\Doctrine\DBAL\Types\BankAccountIdType
             bank_transaction_id: App\Infrastructure\Database\Doctrine\DBAL\Types\BankTransactionIdType

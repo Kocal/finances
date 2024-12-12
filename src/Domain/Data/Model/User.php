@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Data\Model;
 
+use App\Domain\Data\ValueObject\Email;
 use App\Domain\Data\ValueObject\UserId;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,7 +14,7 @@ use function Symfony\Component\Clock\now;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'app_user')]
-#[ORM\Index(columns: ['username'])]
+#[ORM\Index(columns: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -24,10 +25,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(length: 180, unique: true)]
-    private string $username;
+    #[ORM\Column(type: 'email', length: Email::MAX_LENGTH, unique: true)]
+    private Email $email;
 
-    /**
+    /*
      * @var string[]
      */
     #[ORM\Column]
@@ -48,13 +49,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param non-empty-string $username
+     * @param non-empty-string $email
      * @param non-empty-string $password
      */
-    public static function create(UserId $id, string $username, string $password): self
+    public static function create(UserId $id, Email $email, string $password): self
     {
         $user = new self($id);
-        $user->username = $username;
+        $user->email = $email;
         $user->password = $password;
         $user->roles = ['ROLE_USER'];
         $user->createdAt = now();
@@ -64,12 +65,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param non-empty-string $username
+     * @param non-empty-string $email
      * @param non-empty-string $password
      */
-    public static function createAdmin(UserId $id, string $username, string $password): self
+    public static function createAdmin(UserId $id, Email $email, string $password): self
     {
-        $user = self::create($id, $username, $password);
+        $user = self::create($id, $email, $password);
         $user->roles = ['ROLE_ADMIN'];
 
         return $user;
@@ -85,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return $this->username;
+        return $this->email->toString();
     }
 
     /**

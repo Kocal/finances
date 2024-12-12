@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Model\Factory;
 
 use App\Domain\Data\Model\User;
+use App\Domain\Data\ValueObject\Email;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
@@ -37,7 +38,7 @@ final class UserFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'username' => self::faker()->text(180),
+            'email' => self::faker()->email(),
             'plainPassword' => 'password',
             '_admin' => false,
         ];
@@ -53,6 +54,14 @@ final class UserFactory extends PersistentProxyObjectFactory
                 if (! isset($attributes['password'])) {
                     $attributes['password'] = $this->passwordHasher->hash($attributes['plainPassword']);
                     unset($attributes['plainPassword']);
+                }
+
+                if (! $attributes['email'] instanceof Email) {
+                    if (! is_string($attributes['email'])) {
+                        throw new \InvalidArgumentException(sprintf('Expected an instance of %s, but got %s.', Email::class, get_debug_type($attributes['email'])));
+                    }
+
+                    $attributes['email'] = new Email($attributes['email'], false);
                 }
 
                 return $attributes;
