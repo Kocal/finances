@@ -47,6 +47,15 @@ app.install:
 ## App - Install the application (alias to "make app.install")
 app.update: app.install
 
+## App - Extract translations
+app.extract-translations:
+	$(SF_CONSOLE) translation:extract --format yaml --force fr --domain=messages
+	$(SF_CONSOLE) translation:extract --format yaml --force en --domain=messages
+
+######
+# DB #
+######
+
 .PHONY: db-reset
 db-reset:
 	$(SF_CONSOLE) doctrine:database:drop --force --if-exists
