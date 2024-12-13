@@ -22,20 +22,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'user_id')]
     private UserId $id;
 
-    /**
-     * @var non-empty-string
-     */
     #[ORM\Column(type: 'email', length: Email::MAX_LENGTH, unique: true)]
     private Email $email;
 
-    /*
-     * @var string[]
-     */
     #[ORM\Column]
     private array $roles = [];
 
     #[ORM\Column]
     private string $password;
+
+    #[ORM\Column]
+    private string $gravatarUrl;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
@@ -49,7 +46,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param non-empty-string $email
      * @param non-empty-string $password
      */
     public static function create(UserId $id, Email $email, string $password): self
@@ -60,12 +56,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $user->roles = ['ROLE_USER'];
         $user->createdAt = now();
         $user->updatedAt = $user->createdAt;
+        $user->gravatarUrl = sprintf('https://gravatar.com/avatar/%s?s=200', hash('sha256', $email->toString()));
 
         return $user;
     }
 
     /**
-     * @param non-empty-string $email
      * @param non-empty-string $password
      */
     public static function createAdmin(UserId $id, Email $email, string $password): self
@@ -81,9 +77,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return $this->email->toString();
@@ -112,5 +105,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
 
+    }
+
+    public function getGravatarUrl(): string
+    {
+        return $this->gravatarUrl;
     }
 }

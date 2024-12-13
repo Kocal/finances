@@ -7,6 +7,7 @@ namespace App\Domain\UseCase\User\Create;
 use App\Domain\Data\Model\User;
 use App\Domain\Data\Repository\UserRepository;
 use App\Domain\Data\ValueObject\UserId;
+use Finances\Lib\Assert;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
@@ -26,6 +27,7 @@ final readonly class Handler
         $id = UserId::generate();
 
         $password = $this->passwordHasher->hash($input->plainPassword);
+        Assert::notEmpty($password, 'Password hash is empty.');
 
         $user = $input->admin
             ? User::createAdmin($id, $input->email, $password)

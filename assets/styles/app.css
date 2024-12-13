@@ -8,6 +8,7 @@
 		font-weight: 100 900;
 		font-display: block;
 		font-style: normal;
+		/* biome-ignore lint/correctness/noUnknownProperty: CSS4 */
 		font-named-instance: "Regular";
 		src: url("../vendor/inter-ui/variable/InterVariable.woff2") format("woff2");
 	}
@@ -16,6 +17,7 @@
 		font-weight: 100 900;
 		font-display: block;
 		font-style: italic;
+		/* biome-ignore lint/correctness/noUnknownProperty: CSS4 */
 		font-named-instance: "Regular";
 		src: url("../vendor/inter-ui/variable/InterVariable-Italic.woff2")
 			format("woff2");

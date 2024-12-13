@@ -1,5 +1,7 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        SOURCE_COMMIT: '%env(SOURCE_COMMIT)%'
 
 when@test:
     twig:

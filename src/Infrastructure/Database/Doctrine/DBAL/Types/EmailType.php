@@ -31,15 +31,15 @@ final class EmailType extends Type
             return null;
         }
 
-        if (! \is_string($value)) {
-            throw InvalidType::new($value, $this->getName(), ['null', 'string', Email::class]);
+        if (is_string($value)) {
+            return (new Email($value, false))->toString();
         }
 
-        try {
-            return (new Email($value, false))->toString();
-        } catch (\InvalidArgumentException $invalidArgumentException) {
-            throw ValueNotConvertible::new($value, $this->getName(), null, $invalidArgumentException);
+        if ($value instanceof Email) {
+            return $value->toString();
         }
+
+        throw InvalidType::new($value, $this->getName(), ['null', 'string', Email::class]);
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Email

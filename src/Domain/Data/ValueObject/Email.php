@@ -14,6 +14,9 @@ final readonly class Email
 {
     public const MAX_LENGTH = 150;
 
+    /**
+     * @var non-empty-string
+     */
     private string $email;
 
     public function __construct(
@@ -34,6 +37,9 @@ final readonly class Email
         $this->email = $email;
     }
 
+    /**
+     * @phpstan-assert-if-true non-empty-string $email
+     */
     public static function isValid(string $email): bool
     {
         try {
@@ -51,6 +57,9 @@ final readonly class Email
         return $this->email === $email->email;
     }
 
+    /**
+     * @return non-empty-string
+     */
     public function toString(): string
     {
         return $this->email;

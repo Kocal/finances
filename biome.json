@@ -8,6 +8,7 @@
 			"public/assets/*",
 			"public/bundles/*",
 			"var/cache/*",
+			"var/tailwind/*",
 			"vendor/*"
 		]
 	}
