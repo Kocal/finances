@@ -24,11 +24,4 @@ class MimeType
     {
         return $this->value;
     }
-
-    public function isCsv(): bool
-    {
-        return in_array($this->value, [
-            'text/csv',
-        ], true);
-    }
 }

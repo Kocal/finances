@@ -31,4 +31,22 @@ final class BankTransactionDoctrineORMRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->persist($bankTransaction);
     }
+
+    public function hasEquivalent(BankTransaction $bankTransaction): bool
+    {
+        $qb = $this->createQueryBuilder('bt')
+            ->select('COUNT(bt.id)')
+            ->where('bt.bankAccountId = :bankAccountId')
+            ->andWhere("JSON_GET_TEXT(bt.amount, 'amount') = :amount")
+            ->andWhere("JSON_GET_TEXT(bt.amount, 'currency') = :currency")
+            ->andWhere('bt.date = :date')
+            ->andWhere('bt.label = :label')
+            ->setParameter('bankAccountId', $bankTransaction->getBankAccountId())
+            ->setParameter('amount', $bankTransaction->getAmount()->getAmount())
+            ->setParameter('currency', $bankTransaction->getAmount()->getCurrency()->getCode())
+            ->setParameter('date', $bankTransaction->getDate())
+            ->setParameter('label', $bankTransaction->getLabel());
+
+        return (int) $qb->getQuery()->getSingleScalarResult() > 0;
+    }
 }

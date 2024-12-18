@@ -91,14 +91,6 @@ class BankTransaction
         return $this->date;
     }
 
-    public function defineType(BankTransactionType $type): self
-    {
-        $this->type = $type;
-        $this->updatedAt = now();
-
-        return $this;
-    }
-
     public function getType(): BankTransactionType
     {
         return $this->type;

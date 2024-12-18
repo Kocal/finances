@@ -31,7 +31,7 @@ final readonly class CsvStrategy implements Strategy
     public function supports(BankId $bankId, UserDump $dump): bool
     {
         return $bankId->equals(BankId::LA_BANQUE_POSTALE)
-           // TODO: && $dump->mimeType->isCsv()
+            //&& $dump->mimeType->isCsv()
         ;
     }
 
@@ -65,6 +65,8 @@ final readonly class CsvStrategy implements Strategy
         $content = $dump->content;
 
         $rows = explode("\n", $content);
+        $rows = array_map(trim(...), $rows);
+
         if ($rows[5] === '') {
             // We can assume that the first 5 lines are the header
             $content = implode("\n", array_slice($rows, 6));
@@ -96,7 +98,7 @@ final readonly class CsvStrategy implements Strategy
             $transactions[] = new ParsedBankTransaction(
                 date: $date->setTime(0, 0),
                 label: s($row[1])->trim()->toString(),
-                money: new Money((int) ($numberFormatter->parse($row[2]) * 100), $currency),
+                amount: new Money((int) ($numberFormatter->parse($row[2]) * 100), $currency),
             );
         }
 

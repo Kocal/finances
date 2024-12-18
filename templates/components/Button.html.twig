@@ -23,7 +23,7 @@
 
 <{{ tag }}
     class="{{ style.apply({variant, iconOnly}, attributes.render('class'))|tailwind_merge }}"
-    {{ attributes.defaults({href}).without('class') }}
+    {{ attributes.defaults({href, type}).without('class') }}
 >
     {% if icon %}
         <twig:UX:Icon name="{{ icon }}" class="size-5" />

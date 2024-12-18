@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\UseCase\BankTransactions\ParseDump;
+namespace App\Domain\UseCase\BankAccounts\Transactions\ImportDump;
 
 use App\Domain\BankTransactions;
 use App\Domain\Data\Repository\BankAccountRepository;
@@ -14,6 +14,7 @@ final readonly class Handler
     public function __construct(
         private BankTransactions\DumpParsing\Parser $bankTransactionsDumpParser,
         private BankAccountRepository $bankAccountRepository,
+        private BankTransactions\ParsedTransactionsImporter $parsedTransactionsImporter,
     ) {
     }
 
@@ -30,8 +31,15 @@ final readonly class Handler
             $input->dump,
         );
 
+        $importStats = $this->parsedTransactionsImporter->import(
+            $input->bankAccountId,
+            $parsedBankTransactions,
+        );
+
         return new Output(
             parsedBankTransactions: $parsedBankTransactions,
+            imported: $importStats['imported'],
+            skipped: $importStats['skipped'],
         );
     }
 }

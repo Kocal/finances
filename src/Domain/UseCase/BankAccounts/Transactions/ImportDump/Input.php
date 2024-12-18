@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\UseCase\BankTransactions\ParseDump;
+namespace App\Domain\UseCase\BankAccounts\Transactions\ImportDump;
 
 use App\Application\CQRS\Command;
 use App\Domain\Data\ValueObject\BankAccountId;

@@ -13,7 +13,7 @@ final readonly class ParsedBankTransaction
     public function __construct(
         public \DateTimeImmutable $date,
         string $label,
-        public Money $money,
+        public Money $amount,
     ) {
         $this->label = trim($label);
     }

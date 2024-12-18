@@ -15,4 +15,6 @@ interface BankTransactionRepository
     public function findByBankAccount(BankAccountId $bankAccountId): array;
 
     public function save(BankTransaction $bankTransaction): void;
+
+    public function hasEquivalent(BankTransaction $bankTransaction): bool;
 }
