@@ -1,16 +1,16 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Dead catch \- Throwable is never thrown in the try block\.$#'
-			identifier: catch.neverThrown
+			message: '#^Method App\\Application\\ArgumentResolver\\IdArgumentResolver\:\:resolve\(\) return type has no value type specified in iterable type iterable\.$#'
+			identifier: missingType.iterableValue
 			count: 1
-			path: src/Application/Controller/Public/ImportBankTransactionsDump/Action.php
+			path: src/Application/ArgumentResolver/IdArgumentResolver.php
 
 		-
-			message: '#^Property App\\Application\\Controller\\Public\\ImportBankTransactionsDump\\Action\:\:\$commandBus is never read, only written\.$#'
-			identifier: property.onlyWritten
+			message: '#^Method App\\Application\\ArgumentResolver\\UuidArgumentResolver\:\:resolve\(\) return type has no value type specified in iterable type iterable\.$#'
+			identifier: missingType.iterableValue
 			count: 1
-			path: src/Application/Controller/Public/ImportBankTransactionsDump/Action.php
+			path: src/Application/ArgumentResolver/UuidArgumentResolver.php
 
 		-
 			message: '#^Method App\\Application\\Model\\Factory\\BankAccountFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'

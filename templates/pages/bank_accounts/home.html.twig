@@ -1,0 +1,47 @@
+{% extends 'base_app.html.twig' %}
+
+{% block title %}Comptes bancaires{% endblock %}
+
+{% block actions %}
+    {% if bank_accounts is not empty %}
+        <twig:Button
+            variant="primary"
+            icon="tabler:plus"
+            href="{{ path('app_bank_accounts_create') }}"
+        >
+            Ajouter un compte
+        </twig:Button>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if bank_accounts is empty %}
+        <div class="flex flex-col gap-3 items-center py-10">
+            <twig:UX:Icon name="tabler:building-bank" class="size-10 text-gray-400" />
+            <p class="text-center">
+                <strong>Pas de compte bancaire.</strong><br>
+                Ajoutez un compte pour commencer à suivre vos finances.
+            </p>
+
+            <twig:Button
+                variant="primary"
+                icon="tabler:plus"
+                href="{{ path('app_bank_accounts_create') }}"
+            >
+                Ajouter un compte
+            </twig:Button>
+        </div>
+    {% else %}
+        <p>{{ bank_accounts|length }} compte(s) bancaire.</p>
+
+        <ul>
+            {% for bank_account in bank_accounts %}
+            <li>
+                <strong>{{ bank_account.label }}</strong> ({{ bank_account.bankId.toString }})<br>
+                <a class="hover:underline" href="{{ path('app_bank_accounts_transactions_home', {bankAccountId: bank_account.id}) }}">Voir les transactions</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

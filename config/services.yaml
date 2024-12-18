@@ -30,8 +30,14 @@ services:
             - name: 'messenger.message_handler'
               bus: 'messenger.bus.transactional'
 
-    App\Application\Controller\Public\:
-        resource: '../src/Application/Controller/Public/**/Action.php'
+    App\Application\Controller\:
+        resource: '../src/Application/Controller/**/Action.php'
         public: true
         tags:
             - name: 'controller.service_arguments'
+
+    App\Application\ArgumentResolver\:
+        resource: '../src/Application/ArgumentResolver/*'
+        tags:
+            - name: controller.argument_value_resolver
+              priority: 255

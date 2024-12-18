@@ -1,0 +1,33 @@
+{% props variant = 'default', type = 'button', icon = false, iconOnly = false, href = false %}
+
+{% set tag = 'button' %}
+
+{% if href %}
+    {% set tag = 'a' %}
+    {% set type = null %}
+{% endif %}
+
+{% set style = html_cva(
+    base: 'inline-flex items-center rounded-md text-sm font-semibold shadow-sm select-none gap-2',
+    variants: {
+        variant: {
+            default: 'bg-white text-gray-900 hover:bg-gray-50 ring-1 ring-inset ring-gray-300',
+            primary: 'bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
+        },
+        iconOnly: {
+            true: 'p-2',
+            false: 'px-3 py-2',
+        }
+    },
+) %}
+
+<{{ tag }}
+    class="{{ style.apply({variant, iconOnly}, attributes.render('class'))|tailwind_merge }}"
+    {{ attributes.defaults({href}).without('class') }}
+>
+    {% if icon %}
+        <twig:UX:Icon name="{{ icon }}" class="size-5" />
+    {% endif %}
+
+    {% block content '' %}
+</{{ tag }}>

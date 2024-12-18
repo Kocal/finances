@@ -1,0 +1,23 @@
+{% extends 'base_app.html.twig' %}
+{% form_theme form "form/fields.html.twig" %}
+
+{% block title %}Ajouter un compte bancaire{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    <div class="">
+        {{ form_label(form.bank) }}
+        <div>
+            {{ form_widget(form.bank) }}
+            {{ form_errors(form.bank) }}
+        </div>
+
+        {{ form_label(form.label) }}
+        <div>
+            {{ form_widget(form.label) }}
+            {{ form_errors(form.label) }}
+        </div>
+    </div>
+    <twig:Button type="submit" variant="primary">Ajouter</twig:Button>
+    {{ form_end(form) }}
+{% endblock %}

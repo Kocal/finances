@@ -1,0 +1,89 @@
+{% use "form_div_layout.html.twig" %}
+
+{% block form_start %}
+    {% set attr = attr|merge({novalidate: 'novalidate'}) %}
+    {{- parent() -}}
+{% endblock %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            {% if form is rootform %}
+                <twig:Alert type="error">{{ error.message|trans }}</twig:Alert>
+            {% else %}
+                <div class="text-red-600 text-sm">{{ error.message|trans }}</div>
+            {% endif %}
+        {%- endfor -%}
+    {%- endif %}
+{%- endblock form_errors %}
+
+{%- block form_label -%}
+    {%- set label_attr = label_attr|merge({
+        class: [
+            'block text-sm/6 font-medium text-gray-900',
+            (errors|length > 0 ? 'text-red-600'),
+            label_attr.class|default('')
+        ]|tailwind_merge
+    }) -%}
+
+    {{- parent() -}}
+{%- endblock -%}
+
+
+{%- block form_widget_simple -%}
+    {%- set attr = attr|merge({
+        class: [
+            'block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 border-gray-400',
+            (errors|length > 0 ? 'border-red-600'),
+            attr.class|default('')
+        ]|join(' ')|tailwind_merge
+    }) -%}
+
+    {{- parent() -}}
+{%- endblock -%}
+
+{%- block textarea_widget -%}
+    {%- set attr = attr|merge({
+        class: [
+            'block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 border-gray-400',
+            (errors|length > 0 ? 'border-red-600'),
+            attr.class|default('')
+        ]|join(' ')|tailwind_merge
+    }) -%}
+
+    {{- parent() -}}
+{%- endblock -%}
+
+{%- block checkbox_widget -%}
+    {%- set attr = attr|merge({
+        class: [
+            'appearance-none rounded-sm border border-gray-300 bg-white text-indigo-600 checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto ring-inherit',
+            attr.class|default('')
+        ]|join(' ')|tailwind_merge
+    }) -%}
+
+    {{- parent() -}}
+{%- endblock -%}
+
+{%- block radio_widget -%}
+    {%- set attr = attr|merge({
+        class: [
+            'relative size-4 appearance-none rounded-full border border-gray-300 bg-white text-indigo-600 before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden ',
+            attr.class|default('')
+        ]|join(' ')|tailwind_merge
+    }) -%}
+
+    {{- parent() -}}
+{%- endblock -%}
+
+{%- block choice_widget_collapsed -%}
+    {%- set attr = attr|merge({
+        class: [
+            'w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 border-gray-400',
+            (errors|length > 0 ? 'border-red-600'),
+            attr.class|default('')
+        ]|join(' ')|tailwind_merge
+    }) -%}
+
+    {{- parent() -}}
+{%- endblock -%}
