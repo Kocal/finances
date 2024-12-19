@@ -47,3 +47,15 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: src/Domain/Data/ValueObject/Email.php
+
+		-
+			message: '#^Call to an undefined method object\:\:toString\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Infrastructure/Symfony/UX/LiveComponent/Hydration/IdValueObjectHydrationExtension.php
+
+		-
+			message: '#^Call to an undefined method object\:\:toString\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Infrastructure/Symfony/UX/LiveComponent/Hydration/UuidValueObjectHydrationExtension.php

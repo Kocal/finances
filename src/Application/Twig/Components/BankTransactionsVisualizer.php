@@ -21,7 +21,7 @@ final class BankTransactionsVisualizer
     use DefaultActionTrait;
 
     #[LiveProp]
-    public string $bankAccountId;
+    public BankAccountId $bankAccountId;
 
     #[LiveProp(writable: true, format: 'Y-m', url: true)]
     public \DateTimeImmutable $currentMonth;
@@ -56,7 +56,7 @@ final class BankTransactionsVisualizer
     {
         /** @var BankAccounts\Transactions\List\Output $output */
         $output = $this->queryBus->handle(new BankAccounts\Transactions\List\Input(
-            bankAccountId: BankAccountId::fromString($this->bankAccountId),
+            bankAccountId: $this->bankAccountId,
             year: $this->currentMonth->format('Y'),
             month: $this->currentMonth->format('m'),
         ));
