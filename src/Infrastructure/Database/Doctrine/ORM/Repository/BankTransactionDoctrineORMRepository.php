@@ -20,16 +20,28 @@ final class BankTransactionDoctrineORMRepository extends ServiceEntityRepository
         parent::__construct($registry, BankTransaction::class);
     }
 
-    public function findByBankAccount(BankAccountId $bankAccountId): array
+    public function findByBankAccount(BankAccountId $bankAccountId, string|null $year, string|null $month): array
     {
-        return $this->findBy([
-            'bankAccountId' => $bankAccountId,
-        ]);
-    }
+        $qb = $this->createQueryBuilder('bt');
+        $qb
+            ->where('bt.bankAccountId = :bankAccountId')
+            ->setParameter('bankAccountId', $bankAccountId);
 
-    public function save(BankTransaction $bankTransaction): void
-    {
-        $this->getEntityManager()->persist($bankTransaction);
+        if ($year !== null) {
+            $qb
+                ->andWhere("DATE_EXTRACT('YEAR', bt.date) = :year")
+                ->setParameter('year', $year);
+        }
+
+        if ($month !== null) {
+            $qb
+                ->andWhere("DATE_EXTRACT('MONTH', bt.date) = :month")
+                ->setParameter('month', $month);
+        }
+
+        $qb->orderBy('bt.date', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 
     public function hasEquivalent(BankTransaction $bankTransaction): bool
@@ -48,5 +60,10 @@ final class BankTransactionDoctrineORMRepository extends ServiceEntityRepository
             ->setParameter('label', $bankTransaction->getLabel());
 
         return (int) $qb->getQuery()->getSingleScalarResult() > 0;
+    }
+
+    public function save(BankTransaction $bankTransaction): void
+    {
+        $this->getEntityManager()->persist($bankTransaction);
     }
 }

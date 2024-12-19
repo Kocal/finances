@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Controller\BankAccounts\Transactions\ImportDump;
 
 use App\Application\CQRS\CommandBus;
+use App\Application\Security\Voter\CanAccessBankAccountVoter;
 use App\Domain\Data\ValueObject\BankAccountId;
 use App\Domain\Data\ValueObject\BankTransactions\UserDump;
 use App\Domain\UseCase\BankAccounts\Transactions\ImportDump\Input;
@@ -20,6 +21,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/bank_accounts/{bankAccountId}/transactions/import', name: 'app_bank_accounts_transactions_import_dump', methods: ['POST'])]
 #[IsGranted('ROLE_USER')]
+#[IsGranted(CanAccessBankAccountVoter::ATTRIBUTE, subject: 'bankAccountId')]
 final class Action extends AbstractController
 {
     public function __construct(

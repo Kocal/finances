@@ -21,5 +21,7 @@ interface BankAccountRepository
      */
     public function findByUserId(UserId $userId): array;
 
+    public function isOwnedByUser(BankAccountId $subject, UserId $userId): bool;
+
     public function save(BankAccount $bank): void;
 }

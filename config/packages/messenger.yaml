@@ -27,6 +27,7 @@ framework:
                     - doctrine_ping_connection
                     # commit or rollback transactions automatically. Useful for ACID
                     - doctrine_transaction
+            messenger.bus.non_transactional: ~
 
         default_bus: messenger.bus.default
 

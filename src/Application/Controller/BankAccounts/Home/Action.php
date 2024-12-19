@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\BankAccounts\Home;
 
-use App\Application\CQRS\CommandBus;
+use App\Application\CQRS\QueryBus;
 use App\Domain\Data\Model\User;
 use App\Domain\UseCase\BankAccounts;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,14 +18,14 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class Action extends AbstractController
 {
     public function __construct(
-        private CommandBus $commandBus,
+        private QueryBus $queryBus,
     ) {
     }
 
     public function __invoke(#[CurrentUser] User $user): Response
     {
         /** @var BankAccounts\List\Output $output */
-        $output = $this->commandBus->handle(new BankAccounts\List\Input(
+        $output = $this->queryBus->handle(new BankAccounts\List\Input(
             userId: $user->getId(),
         ));
 

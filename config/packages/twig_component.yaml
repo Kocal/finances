@@ -2,4 +2,4 @@ twig_component:
     anonymous_template_directory: 'components/'
     defaults:
         # Namespace & directory for components
-        App\Shared\Application\Twig\Components\: 'components/'
+        App\Application\Twig\Components\: 'components/'

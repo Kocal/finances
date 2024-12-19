@@ -34,6 +34,14 @@ final class BankAccountDoctrineORMRepository extends ServiceEntityRepository imp
         ]);
     }
 
+    public function isOwnedByUser(BankAccountId $subject, UserId $userId): bool
+    {
+        return $this->findOneBy([
+            'id' => $subject,
+            'userId' => $userId,
+        ]) !== null;
+    }
+
     public function save(BankAccount $bank): void
     {
         $this->getEntityManager()->persist($bank);

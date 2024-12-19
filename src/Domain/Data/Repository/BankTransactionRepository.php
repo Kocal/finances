@@ -12,9 +12,14 @@ interface BankTransactionRepository
     /**
      * @return array<BankTransaction>
      */
-    public function findByBankAccount(BankAccountId $bankAccountId): array;
+    public function findByBankAccount(BankAccountId $bankAccountId, string|null $year, string|null $month): array;
 
     public function save(BankTransaction $bankTransaction): void;
 
     public function hasEquivalent(BankTransaction $bankTransaction): bool;
+
+    /**
+     * @return array<\DateTimeImmutable>
+     */
+    //    public function getMonthlyDateIntervals(BankAccountId $bankAccountId): array;
 }

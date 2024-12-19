@@ -36,7 +36,8 @@ doctrine:
             auto_mapping: false
         dql:
             string_functions:
-                JSON_GET_TEXT: \Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonGetText
+                JSON_GET_TEXT: MartinGeorgiev\Doctrine\ORM\Query\AST\Functions\JsonGetFieldAsText
+                DATE_EXTRACT: MartinGeorgiev\Doctrine\ORM\Query\AST\Functions\DateExtract
 
 when@test:
     doctrine:

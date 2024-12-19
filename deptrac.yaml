@@ -11,7 +11,7 @@ deptrac:
 
         - name: Application
           collectors:
-            - { type: directory, value: src/Application/(?!(CQRS/Command\.php)).* }
+            - { type: directory, value: src/Application/(?!(CQRS/Command\.php)|(CQRS/Query\.php)).* }
 
         - name: Infrastructure
           collectors:

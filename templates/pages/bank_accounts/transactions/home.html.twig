@@ -2,18 +2,18 @@
 
 {% block title %}Transactions{% endblock %}
 
-{% block subtitle %}
-    <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-        <div class="mt-2 flex items-center text-sm text-gray-500">
-            <twig:UX:Icon name="tabler:coin-euro-filled" class="mr-1.5 size-5 shrink-0 text-gray-400" />
-            $120k &ndash; $140k
-        </div>
-        <div class="mt-2 flex items-center text-sm text-gray-500">
-            <twig:UX:Icon name="tabler:calendar" class="mr-1.5 size-5 shrink-0 text-gray-400" />
-            Closing on January 9, 2020
-        </div>
-    </div>
-{% endblock %}
+{# {% block subtitle %} #}
+{# <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6"> #}
+{# <div class="mt-2 flex items-center text-sm text-gray-500 line-through"> #}
+{# <twig:UX:Icon name="tabler:coin-euro-filled" class="mr-1.5 size-5 shrink-0 text-gray-400" /> #}
+{# $120k &ndash; $140k #}
+{# </div> #}
+{# <div class="mt-2 flex items-center text-sm text-gray-500 line-through"> #}
+{# <twig:UX:Icon name="tabler:calendar" class="mr-1.5 size-5 shrink-0 text-gray-400" /> #}
+{# Closing on January 9, 2020 #}
+{# </div> #}
+{# </div> #}
+{# {% endblock %} #}
 
 {% block actions %}
     {# <twig:Button icon="tabler:settings" href="#"> #}
@@ -36,4 +36,13 @@
             Import
         </twig:Button>
     </form>
+{% endblock %}
+
+{% block content %}
+
+        <twig:BankTransactionsVisualizer
+            bankAccountId="{{ bankAccountId }}"
+            class="mt-2"
+        />
+
 {% endblock %}
