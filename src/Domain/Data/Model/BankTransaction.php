@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Data\Model;
 
 use App\Domain\Data\ValueObject\BankAccountId;
+use App\Domain\Data\ValueObject\BankTransactionCategory;
 use App\Domain\Data\ValueObject\BankTransactionId;
 use App\Domain\Data\ValueObject\BankTransactionType;
 use Doctrine\DBAL\Types\Types;
@@ -31,7 +32,10 @@ class BankTransaction
     private string $label;
 
     #[ORM\Column(type: Types::STRING, enumType: BankTransactionType::class)]
-    private BankTransactionType $type = BankTransactionType::UNKNOWN;
+    private BankTransactionType $type;
+
+    #[ORM\Column(type: Types::STRING, enumType: BankTransactionCategory::class)]
+    private BankTransactionCategory $category;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $date;
@@ -52,7 +56,8 @@ class BankTransaction
         Money $amount,
         string $label,
         \DateTimeImmutable $date,
-        BankTransactionType $type,
+        BankTransactionType $type = BankTransactionType::Unknown,
+        BankTransactionCategory $category = BankTransactionCategory::Unknown,
     ): self {
         $bankTransaction = new self();
         $bankTransaction->bankAccountId = $bankAccountId;
@@ -60,6 +65,7 @@ class BankTransaction
         $bankTransaction->label = $label;
         $bankTransaction->date = $date;
         $bankTransaction->type = $type;
+        $bankTransaction->category = $category;
         $bankTransaction->createdAt = now();
         $bankTransaction->updatedAt = $bankTransaction->createdAt;
 
@@ -94,5 +100,10 @@ class BankTransaction
     public function getType(): BankTransactionType
     {
         return $this->type;
+    }
+
+    public function getCategory(): BankTransactionCategory
+    {
+        return $this->category;
     }
 }

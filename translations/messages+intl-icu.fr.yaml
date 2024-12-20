@@ -1,3 +1,125 @@
 app.menu.home: __app.menu.home
 app.menu.bank_accounts: Comptes bancaires
 app.menu.income_splitter: __app.menu.income_splitter
+app.enum.bank_transaction_category:
+    unknown: Inconnu
+    subscription: Abonnement
+    subscription_other: Abonnement (autre)
+    subscription_internet: Abonnement Internet
+    subscription_mobile_telephony: Abonnement téléphonie mobile
+    subscription_fixed_telephone: Abonnement téléphonie fixe
+    purchases_and_shopping: Achats et shopping
+    purchases_and_shopping_other: Achats et shopping (autre)
+    purchases_and_shopping_sport: Articles de sport
+    purchases_and_shopping_gift: Cadeaux
+    purchases_and_shopping_movie: Films et DVDs
+    purchases_and_shopping_high_tech: High-tech
+    purchases_and_shopping_licenses: Licences
+    purchases_and_shopping_book: Livres
+    purchases_and_shopping_music: Musique
+    purchases_and_shopping_clothing: Vêtements/Chaussures
+    food_and_groceries: Alimentation et restauration
+    food_and_groceries_other: Alimentation et restauration (autre)
+    food_and_groceries_cafe: Café
+    food_and_groceries_fast_food: Fast-food
+    food_and_groceries_restaurant: Restaurant
+    food_and_groceries_supermarket: Supermarché / épicerie
+    transport: Auto & transport
+    transport_other: Auto & transport (autre)
+    transport_insurance: Assurance auto
+    transport_plane_ticket: Billet d'avion
+    transport_train_ticket: Billet de train
+    transport_fuel: Essence
+    transport_vehicle_maintenance: Entretien véhicule
+    transport_vehicle_rental: Location de véhicule
+    transport_toll: Péage
+    transport_parking: Parking
+    transport_public_transport: Transport en commun
+    bank: Banque
+    bank_other: Banque (autre)
+    bank_monthly_debit_card: Débit mensuel carte
+    bank_savings: Épargne
+    bank_charges: Frais bancaires
+    bank_mortgage: Hypothèque
+    bank_payment_incident: Incident de paiement
+    bank_loan_repayment: Remboursement de prêt
+    bank_banking_service: Service bancaire
+    professional: Dépenses professionnelles
+    professional_other: Dépenses professionnelles (autre)
+    professional_accounting: Comptabilité
+    professional_tip: Pourboire
+    professional_social_contribution: Cotisation sociale
+    professional_office_supplies: Fournitures de bureau
+    professional_shipping_costs: Frais d'expédition
+    professional_printing_costs: Frais d'impression
+    professional_recruitment_costs: Frais de recrutement
+    professional_legal_fees: Frais juridiques
+    professional_office_maintenance: Maintenance de bureau
+    professional_marketing: Marketing
+    professional_expense_report: Note de frais
+    professional_pension: Prévoyance
+    professional_advertising: Publicité
+    professional_executive_compensation: Rémunération des dirigeants
+    professional_salary: Salaire
+    professional_online_service: Service en ligne
+    professional_outsourcing: Sous-traitance
+    professional_apprenticeship_tax: Taxe d'apprentissage
+    various: Divers
+    various_other: Divers (autre)
+    various_insurance: Assurance
+    various_donation: Don
+    various_pressing: Pressing
+    aesthetic_and_care: Esthétique et soins
+    aesthetic_and_care_other: Esthétique et soins (autre)
+    aesthetic_and_care_cosmetics: Cosmétiques
+    aesthetic_and_care_hair: Coiffeur
+    aesthetic_and_care_esthetic: Esthétique
+    aesthetic_and_care_spa_and_massage: Spa et massage
+    taxes_and_duties: Impôts et taxes
+    taxes_and_duties_other: Impôts et taxes (autre)
+    taxes_and_duties_fines: Amendes
+    taxes_and_duties_property_tax: Taxe foncière
+    taxes_and_duties_income_tax: Taxe sur le revenu
+    taxes_and_duties_vat: TVA
+    housing: Logement
+    housing_other: Logement (autre)
+    housing_home_insurance: Assurance habitation
+    housing_miscellaneous_expenses: Charges diverses
+    housing_decoration: Décoration
+    housing_water: Eau
+    housing_electricity: Électricité
+    housing_maintenance: Entretien
+    housing_outdoor_and_garden: Extérieur et jardin
+    housing_gas: Gaz
+    housing_rent: Loyer
+    leisure: Loisirs
+    leisure_other: Loisirs (autre)
+    leisure_bar_and_club: Bar et club
+    leisure_entertainment: Divertissement
+    leisure_pet_expenses: Frais d'animaux
+    leisure_hobby: Hobby
+    leisure_hotel: Hôtel
+    leisure_restaurant: Restaurant
+    leisure_cultural_outing: Sortie culturelle
+    leisure_sport: Sport
+    leisure_sport_winter: Sport d'hiver
+    leisure_travel: Voyage
+    leisure_vacation: Vacances
+    withdrawal: Retrait
+    withdrawal_cheque: Retrait chèque
+    withdrawal_transfer: Virement
+    withdrawal_internal_transfer: Virement interne
+    health: Santé
+    health_other: Santé (autre)
+    health_dentist: Dentiste
+    health_doctor: Docteur
+    health_mutual_insurance: Mutuelle
+    health_optician: Opticien
+    health_pharmacy: Pharmacie
+    health_hospital: Hôpital
+app.enum.bank_transaction_type:
+    unknown: Inconnu
+    essential: Essentiel
+    pleasure: Plaisir
+    saving: Épargne
+    extra: Extra

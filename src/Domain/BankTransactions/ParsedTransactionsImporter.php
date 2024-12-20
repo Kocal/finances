@@ -8,7 +8,6 @@ use App\Domain\Data\Model\BankTransaction;
 use App\Domain\Data\Model\ParsedBankTransaction;
 use App\Domain\Data\Repository\BankTransactionRepository;
 use App\Domain\Data\ValueObject\BankAccountId;
-use App\Domain\Data\ValueObject\BankTransactionType;
 
 final readonly class ParsedTransactionsImporter
 {
@@ -34,7 +33,6 @@ final readonly class ParsedTransactionsImporter
                 $parsedTransaction->amount,
                 $parsedTransaction->label,
                 $parsedTransaction->date,
-                $parsedTransaction->amount->isNegative() ? BankTransactionType::DEBIT : BankTransactionType::CREDIT,
             );
 
             if (! $this->bankTransactionRepository->hasEquivalent($bankTransaction)) {

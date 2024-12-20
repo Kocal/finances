@@ -152,6 +152,7 @@ lint.fix: lint.back lint.front.fix
 lint.back:
 	$(SF_CONSOLE) lint:container
 	$(SF_CONSOLE) lint:xliff translations
+	$(SF_CONSOLE) lint:translations
 	$(SF_CONSOLE) lint:yaml --parse-tags config
 	$(SF_CONSOLE) lint:twig templates
 	#$(SF_CONSOLE) doctrine:schema:validate
