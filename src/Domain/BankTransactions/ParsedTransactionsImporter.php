@@ -28,11 +28,14 @@ final readonly class ParsedTransactionsImporter
         ];
 
         foreach ($parsedTransactions as $parsedTransaction) {
+            [$type, $category] = TypeAndCategoryGuesser::guess($parsedTransaction->label);
             $bankTransaction = BankTransaction::create(
                 $bankAccountId,
                 $parsedTransaction->amount,
                 $parsedTransaction->label,
                 $parsedTransaction->date,
+                $type,
+                $category,
             );
 
             if (! $this->bankTransactionRepository->hasEquivalent($bankTransaction)) {

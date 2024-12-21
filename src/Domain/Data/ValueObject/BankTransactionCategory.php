@@ -53,7 +53,7 @@ enum BankTransactionCategory: string
     case BankCharges = 'bank_charges';
     case BankMortgage = 'bank_mortgage';
     case BankPaymentIncident = 'bank_payment_incident';
-    case BankLoadRepayment = 'bank_loan_repayment';
+    case BankLoanRepayment = 'bank_loan_repayment';
     case BankBankingService = 'bank_banking_service';
 
     case Professional = 'professional';
@@ -82,6 +82,7 @@ enum BankTransactionCategory: string
     case VariousInsurance = 'various_insurance';
     case VariousDonation = 'various_donation';
     case VariousPressing = 'various_pressing';
+    case VariousPayPal = 'various_paypal';
 
     case AestheticAndCare = 'aesthetic_and_care';
     case AestheticAndCareOther = 'aesthetic_and_care_other';
@@ -208,7 +209,7 @@ enum BankTransactionCategory: string
                 self::BankCharges,
                 self::BankMortgage,
                 self::BankPaymentIncident,
-                self::BankLoadRepayment,
+                self::BankLoanRepayment,
                 self::BankBankingService,
             ],
             self::Professional => [
@@ -237,6 +238,7 @@ enum BankTransactionCategory: string
                 self::VariousInsurance,
                 self::VariousDonation,
                 self::VariousPressing,
+                self::VariousPayPal,
             ],
             self::AestheticAndCare => [
                 self::AestheticAndCareOther,
