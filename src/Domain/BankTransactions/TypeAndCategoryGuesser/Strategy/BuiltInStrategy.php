@@ -2,17 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\BankTransactions;
+namespace App\Domain\BankTransactions\TypeAndCategoryGuesser\Strategy;
 
 use App\Domain\Data\ValueObject\BankTransactionCategory;
 use App\Domain\Data\ValueObject\BankTransactionType;
 
-final readonly class TypeAndCategoryGuesser
+final class BuiltInStrategy implements Strategy
 {
-    /**
-     * @return array{BankTransactionType, BankTransactionCategory}
-     */
-    public static function guess(string $label): array
+    public function guess(string $label): ?array
     {
         $label = mb_strtolower($label);
 
@@ -70,7 +67,7 @@ final readonly class TypeAndCategoryGuesser
             str_contains($label, 'achat cb brico depot') => [BankTransactionType::Extra, BankTransactionCategory::Various],
             str_contains($label, 'achat cb booking.com') => [BankTransactionType::Extra, BankTransactionCategory::LeisureHotel],
 
-            default => [BankTransactionType::Unknown, BankTransactionCategory::Unknown],
+            default => null,
         };
     }
 }

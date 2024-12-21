@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\BankTransactions;
 
+use App\Domain\BankTransactions\TypeAndCategoryGuesser\TypeAndCategoryGuesser;
 use App\Domain\Data\Model\BankTransaction;
 use App\Domain\Data\Model\ParsedBankTransaction;
 use App\Domain\Data\Repository\BankTransactionRepository;
@@ -13,6 +14,7 @@ final readonly class ParsedTransactionsImporter
 {
     public function __construct(
         private BankTransactionRepository $bankTransactionRepository,
+        private TypeAndCategoryGuesser $typeAndCategoryGuesser,
     ) {
     }
 
@@ -28,7 +30,7 @@ final readonly class ParsedTransactionsImporter
         ];
 
         foreach ($parsedTransactions as $parsedTransaction) {
-            [$type, $category] = TypeAndCategoryGuesser::guess($parsedTransaction->label);
+            [$type, $category] = $this->typeAndCategoryGuesser->guess($parsedTransaction->label);
             $bankTransaction = BankTransaction::create(
                 $bankAccountId,
                 $parsedTransaction->amount,

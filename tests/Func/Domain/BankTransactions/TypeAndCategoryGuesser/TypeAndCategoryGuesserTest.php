@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\Domain\BankTransactions;
+namespace App\Tests\Func\Domain\BankTransactions\TypeAndCategoryGuesser;
 
-use App\Domain\BankTransactions\TypeAndCategoryGuesser;
+use App\Domain\BankTransactions\TypeAndCategoryGuesser\TypeAndCategoryGuesser;
 use App\Domain\Data\ValueObject\BankTransactionCategory;
 use App\Domain\Data\ValueObject\BankTransactionType;
-use App\Tests\Unit\UnitTestCase;
+use App\Tests\Func\FunctionalTestCase;
 use PHPUnit\Framework\Attributes\TestWith;
 
-final class TypeAndCategoryGuesserTest extends UnitTestCase
+final class TypeAndCategoryGuesserTest extends FunctionalTestCase
 {
     #[TestWith([BankTransactionType::Essential, BankTransactionCategory::FoodAndGroceriesSupermarket, 'ACHAT CB BOUCHERIES AND 16.12.24 EUR         22,00 CARTE NO  999 APPLE PAY'])]
     #[TestWith([BankTransactionType::Essential, BankTransactionCategory::FoodAndGroceriesSupermarket, 'ACHAT CB CRF VILLEFRANC 16.12.24 EUR         22,00 CARTE NO  999 APPLE PAY'])]
@@ -281,7 +281,9 @@ final class TypeAndCategoryGuesserTest extends UnitTestCase
     #[TestWith([BankTransactionType::Unknown, BankTransactionCategory::Unknown, 'VIREMENT INSTANTANE DE Hugo Alliaume Envoye depuis Revolut'])]
     public function testGuess(BankTransactionType $expectedType, BankTransactionCategory $expectedCategory, string $label): void
     {
-        [$type, $category] = TypeAndCategoryGuesser::guess($label);
+        $typeAndCategoryGuesser = $this->getService(TypeAndCategoryGuesser::class);
+
+        [$type, $category] = $typeAndCategoryGuesser->guess($label);
 
         self::assertSame($expectedType, $type, sprintf('Transaction "%s" should be of type "%s"', $label, $expectedType->value));
         self::assertSame($expectedCategory, $category, sprintf('Transaction "%s" should be of category "%s"', $label, $expectedCategory->value));
