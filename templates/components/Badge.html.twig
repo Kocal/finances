@@ -1,0 +1,12 @@
+{% props color %}
+{%- set style_badge = html_cva(
+    base: 'text-xs px-1 rounded inline',
+) -%}
+
+<div
+    class="{{ style_badge.apply({}, attributes.render('class'))|tailwind_merge }}"
+    style="color: {{ color }}; background-color: color-mix(in srgb, white 90%, {{ color }});"
+    {{ attributes.defaults({}).without('class') }}
+>
+    {%- block content %}{% endblock -%}
+</div>

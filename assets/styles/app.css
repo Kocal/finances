@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Webfonts */
 @layer base {
 	@font-face {
 		font-family: Inter var;
@@ -21,5 +22,30 @@
 		font-named-instance: "Regular";
 		src: url("../vendor/inter-ui/variable/InterVariable-Italic.woff2")
 			format("woff2");
+	}
+}
+
+@layer base {
+	:root {
+		--BankTransactionCategory-Unknown-Color: #a5a5a5;
+		--BankTransactionCategory-Subscription-Color: #a07db8;
+		--BankTransactionCategory-PurchasesAndShopping-Color: #ed2158;
+		--BankTransactionCategory-FoodAndGroceries-Color: #eab729;
+		--BankTransactionCategory-Transport-Color: #2dcacd;
+		--BankTransactionCategory-Bank-Color: #a36c45;
+		--BankTransactionCategory-Professional-Color: #9c4bb8;
+		--BankTransactionCategory-Various-Color: #70c6d4;
+		--BankTransactionCategory-AestheticAndCare-Color: #e67ab0;
+		--BankTransactionCategory-TaxesAndDuties-Color: #7fbfeb;
+		--BankTransactionCategory-Housing-Color: #466ff1;
+		--BankTransactionCategory-Leisure-Color: #571a9c;
+		--BankTransactionCategory-Withdrawal-Color: #1ccf3a;
+		--BankTransactionCategory-Health-Color: #ef5c5c;
+
+		--BankTransactionType-Unknown-Color: #a5a5a5;
+		--BankTransactionType-Essential-Color: #0fbd0f;
+		--BankTransactionType-Pleasure-Color: #3784ea;
+		--BankTransactionType-Saving-Color: #8a5630;
+		--BankTransactionType-Extra-Color: #fa4fa5;
 	}
 }

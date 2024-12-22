@@ -139,6 +139,489 @@ enum BankTransactionCategory: string
     case HealthHospital = 'health_hospital';
 
     /**
+     * @var array<key-of<self>, array{ color: string, icon: string }>
+     */
+    private const array CONFIGURATION = [
+        self::Unknown->name => [
+            'color' => 'var(--BankTransactionCategory-Unknown-Color)',
+            'icon' => 'mdi:question-mark',
+        ],
+
+        self::Subscription->name => [
+            'color' => 'var(--BankTransactionCategory-Subscription-Color)',
+            'icon' => 'mdi:circle-arrows',
+        ],
+        self::SubscriptionOther->name => [
+            'color' => 'var(--BankTransactionCategory-Subscription-Color)',
+            'icon' => 'mdi:refresh',
+        ],
+        self::SubscriptionInternet->name => [
+            'color' => 'var(--BankTransactionCategory-Subscription-Color)',
+            'icon' => 'mdi:internet',
+        ],
+        self::SubscriptionMobileTelephony->name => [
+            'color' => 'var(--BankTransactionCategory-Subscription-Color)',
+            'icon' => 'mdi:mobile-phone',
+        ],
+        self::SubscriptionFixedTelephony->name => [
+            'color' => 'var(--BankTransactionCategory-Subscription-Color)',
+            'icon' => 'mdi:phone-classic',
+        ],
+
+        self::PurchasesAndShopping->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:shopping-cart',
+        ],
+        self::PurchasesAndShoppingOther->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:shopping',
+        ],
+        self::PurchasesAndShoppingSport->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:soccer',
+        ],
+        self::PurchasesAndShoppingGift->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:gift',
+        ],
+        self::PurchasesAndShoppingMovie->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:movie',
+        ],
+        self::PurchasesAndShoppingHighTech->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:mobile-phone',
+        ],
+        self::PurchasesAndShoppingLicenses->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:qrcode',
+        ],
+        self::PurchasesAndShoppingBook->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:book-open-page-variant',
+        ],
+        self::PurchasesAndShoppingMusic->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:music',
+        ],
+        self::PurchasesAndShoppingClothing->name => [
+            'color' => 'var(--BankTransactionCategory-PurchasesAndShopping-Color)',
+            'icon' => 'mdi:tshirt-crew',
+        ],
+
+        self::FoodAndGroceries->name => [
+            'color' => 'var(--BankTransactionCategory-FoodAndGroceries-Color)',
+            'icon' => 'mdi:food-fork-cup',
+        ],
+        self::FoodAndGroceriesOther->name => [
+            'color' => 'var(--BankTransactionCategory-FoodAndGroceries-Color)',
+            'icon' => 'mdi:drink',
+        ],
+        self::FoodAndGroceriesCafe->name => [
+            'color' => 'var(--BankTransactionCategory-FoodAndGroceries-Color)',
+            'icon' => 'mdi:coffee',
+        ],
+        self::FoodAndGroceriesFastFood->name => [
+            'color' => 'var(--BankTransactionCategory-FoodAndGroceries-Color)',
+            'icon' => 'mdi:burger',
+        ],
+        self::FoodAndGroceriesRestaurant->name => [
+            'color' => 'var(--BankTransactionCategory-FoodAndGroceries-Color)',
+            'icon' => 'mdi:silverware-fork-knife',
+        ],
+        self::FoodAndGroceriesSupermarket->name => [
+            'color' => 'var(--BankTransactionCategory-FoodAndGroceries-Color)',
+            'icon' => 'mdi:shopping-cart',
+        ],
+
+        self::Transport->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:car',
+        ],
+        self::TransportOther->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:steering',
+        ],
+        self::TransportVehicleInsurance->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:car-insurance',
+        ],
+        self::TransportPlaneTicket->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:plane',
+        ],
+        self::TransportTrainTicket->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:train',
+        ],
+        self::TransportFuel->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:fuel-pump',
+        ],
+        self::TransportVehicleMaintenance->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:car-wrench',
+        ],
+        self::TransportVehicleRental->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:car-location',
+        ],
+        self::TransportToll->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:toll',
+        ],
+        self::TransportParking->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:parking',
+        ],
+        self::TransportPublicTransport->name => [
+            'color' => 'var(--BankTransactionCategory-Transport-Color)',
+            'icon' => 'mdi:bus',
+        ],
+
+        self::Bank->name => [
+            'color' => 'var(--BankTransactionCategory-Bank-Color)',
+            'icon' => 'mdi:bank',
+        ],
+        self::BankOther->name => [
+            'color' => 'var(--BankTransactionCategory-Bank-Color)',
+            'icon' => 'mdi:cash',
+        ],
+        self::BankMonthlyDebitCard->name => [
+            'color' => 'var(--BankTransactionCategory-Bank-Color)',
+            'icon' => 'mdi:credit-card',
+        ],
+        self::BankSavings->name => [
+            'color' => 'var(--BankTransactionCategory-Bank-Color)',
+            'icon' => 'mdi:piggy-bank',
+        ],
+        self::BankCharges->name => [
+            'color' => 'var(--BankTransactionCategory-Bank-Color)',
+            'icon' => 'mdi:calculator-variant-outline',
+        ],
+        self::BankMortgage->name => [
+            'color' => 'var(--BankTransactionCategory-Bank-Color)',
+            'icon' => 'mdi:house-off',
+        ],
+        self::BankPaymentIncident->name => [
+            'color' => 'var(--BankTransactionCategory-Bank-Color)',
+            'icon' => 'mdi:bank-remove',
+        ],
+        self::BankLoanRepayment->name => [
+            'color' => 'var(--BankTransactionCategory-Bank-Color)',
+            'icon' => 'mdi:swap-horizontal',
+        ],
+        self::BankBankingService->name => [
+            'color' => 'var(--BankTransactionCategory-Bank-Color)',
+            'icon' => 'mdi:thumb-up',
+        ],
+
+        self::Professional->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:briefcase-variant',
+        ],
+        self::ProfessionalOther->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:briefcase',
+        ],
+        self::ProfessionalAccounting->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:calculator',
+        ],
+        self::ProfessionalTip->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:tooltip-edit-outline',
+        ],
+        self::ProfessionalSocialContribution->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:hand-coin',
+        ],
+        self::ProfessionalOfficeSupplies->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:desk-lamp',
+        ],
+        self::ProfessionalShippingCosts->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:postage-stamp',
+        ],
+        self::ProfessionalPrintingCosts->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:printer',
+        ],
+        self::ProfessionalRecruitmentCosts->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:people-group',
+        ],
+        self::ProfessionalLegalFees->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:court-hammer',
+        ],
+        self::ProfessionalOfficeMaintenance->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:vacuum-cleaner',
+        ],
+        self::ProfessionalMarketing->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:chart-line',
+        ],
+        self::ProfessionalExpenseReport->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:file-check-outline',
+        ],
+        self::ProfessionalPension->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:binoculars',
+        ],
+        self::ProfessionalAdvertising->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:ads',
+        ],
+        self::ProfessionalExecutiveCompensation->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:tie',
+        ],
+        self::ProfessionalSalary->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:account-cash',
+        ],
+        self::ProfessionalOnlineService->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:at',
+        ],
+        self::ProfessionalOutsourcing->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:notebook-check',
+        ],
+        self::ProfessionalApprenticeshipTax->name => [
+            'color' => 'var(--BankTransactionCategory-Professional-Color)',
+            'icon' => 'mdi:book-education',
+        ],
+
+        self::Various->name => [
+            'color' => 'var(--BankTransactionCategory-Various-Color)',
+            'icon' => 'mdi:folder-question',
+        ],
+        self::VariousOther->name => [
+            'color' => 'var(--BankTransactionCategory-Various-Color)',
+            'icon' => 'mdi:folder-question',
+        ],
+        self::VariousInsurance->name => [
+            'color' => 'var(--BankTransactionCategory-Various-Color)',
+            'icon' => 'mdi:umbrella',
+        ],
+        self::VariousDonation->name => [
+            'color' => 'var(--BankTransactionCategory-Various-Color)',
+            'icon' => 'mdi:charity',
+        ],
+        self::VariousPressing->name => [
+            'color' => 'var(--BankTransactionCategory-Various-Color)',
+            'icon' => 'mdi:clothes-hanger',
+        ],
+        self::VariousPayPal->name => [
+            'color' => 'var(--BankTransactionCategory-Various-Color)',
+            'icon' => 'ic:baseline-paypal',
+        ],
+
+        self::AestheticAndCare->name => [
+            'color' => 'var(--BankTransactionCategory-AestheticAndCare-Color)',
+            'icon' => 'mdi:face-man-shimmer',
+        ],
+        self::AestheticAndCareOther->name => [
+            'color' => 'var(--BankTransactionCategory-AestheticAndCare-Color)',
+            'icon' => 'mdi:shimmer',
+        ],
+        self::AestheticAndCareCosmetics->name => [
+            'color' => 'var(--BankTransactionCategory-AestheticAndCare-Color)',
+            'icon' => 'mdi:lipstick',
+        ],
+        self::AestheticAndCareHair->name => [
+            'color' => 'var(--BankTransactionCategory-AestheticAndCare-Color)',
+            'icon' => 'mdi:scissors',
+        ],
+        self::AestheticAndCareEsthetic->name => [
+            'color' => 'var(--BankTransactionCategory-AestheticAndCare-Color)',
+            'icon' => 'mdi:eye',
+        ],
+        self::AestheticAndCareSpaAndMassage->name => [
+            'color' => 'var(--BankTransactionCategory-AestheticAndCare-Color)',
+            'icon' => 'mdi:spa',
+        ],
+
+        self::TaxesAndDuties->name => [
+            'color' => 'var(--BankTransactionCategory-TaxesAndDuties-Color)',
+            'icon' => 'tabler:laurel-wreath-filled',
+        ],
+        self::TaxesAndDutiesOther->name => [
+            'color' => 'var(--BankTransactionCategory-TaxesAndDuties-Color)',
+            'icon' => 'mdi:gauge',
+        ],
+        self::TaxesAndDutiesFines->name => [
+            'color' => 'var(--BankTransactionCategory-TaxesAndDuties-Color)',
+            'icon' => 'mdi:home',
+        ],
+        self::TaxesAndDutiesPropertyTax->name => [
+            'color' => 'var(--BankTransactionCategory-TaxesAndDuties-Color)',
+            'icon' => 'mdi:file-star',
+        ],
+        self::TaxesAndDutiesIncomeTax->name => [
+            'color' => 'var(--BankTransactionCategory-TaxesAndDuties-Color)',
+            'icon' => 'mdi:badge',
+        ],
+        self::TaxesAndDutiesVat->name => [
+            'color' => 'var(--BankTransactionCategory-TaxesAndDuties-Color)',
+            'icon' => 'mdi:dots-circle',
+        ],
+
+        self::Housing->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:home',
+        ],
+        self::HousingOther->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:lightbulb',
+        ],
+        self::HousingHomeInsurance->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:shield-home',
+        ],
+        self::HousingMiscellaneousExpenses->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:wrench',
+        ],
+        self::HousingDecoration->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:image-frame',
+        ],
+        self::HousingWater->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:water',
+        ],
+        self::HousingElectricity->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:electricity',
+        ],
+        self::HousingMaintenance->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:format-paint',
+        ],
+        self::HousingOutdoorAndGarden->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:pine-tree',
+        ],
+        self::HousingGas->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:gas',
+        ],
+        self::HousingRent->name => [
+            'color' => 'var(--BankTransactionCategory-Housing-Color)',
+            'icon' => 'mdi:home',
+        ],
+
+        self::Leisure->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:rocket-launch',
+        ],
+        self::LeisureOther->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:sparkles',
+        ],
+        self::LeisureBarAndClub->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:local-bar',
+        ],
+        self::LeisureEntertainment->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:gamepad-classic',
+        ],
+        self::LeisurePetExpenses->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:cat',
+        ],
+        self::LeisureHobby->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:cards-spade',
+        ],
+        self::LeisureHotel->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:hotel',
+        ],
+        self::LeisureRestaurant->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:silverware-fork-knife',
+        ],
+        self::LeisureCulturalOuting->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:eiffel-tower',
+        ],
+        self::LeisureSport->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:soccer',
+        ],
+        self::LeisureSportWinter->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:ski',
+        ],
+        self::LeisureTravel->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:bag-suitcase',
+        ],
+        self::LeisureVacation->name => [
+            'color' => 'var(--BankTransactionCategory-Leisure-Color)',
+            'icon' => 'mdi:white-balance-sunny',
+        ],
+
+        self::Withdrawal->name => [
+            'color' => 'var(--BankTransactionCategory-Withdrawal-Color)',
+            'icon' => 'mdi:credit-card',
+        ],
+        self::WithdrawalCheque->name => [
+            'color' => 'var(--BankTransactionCategory-Withdrawal-Color)',
+            'icon' => 'mdi:sign',
+        ],
+        self::WithdrawalTransfer->name => [
+            'color' => 'var(--BankTransactionCategory-Withdrawal-Color)',
+            'icon' => 'mdi:bank-transfer-out',
+        ],
+        self::WithdrawalInternalTransfer->name => [
+            'color' => 'var(--BankTransactionCategory-Withdrawal-Color)',
+            'icon' => 'mdi:bank-transfer-in',
+        ],
+
+        self::Health->name => [
+            'color' => 'var(--BankTransactionCategory-Health-Color)',
+            'icon' => 'mdi:hospital',
+        ],
+        self::HealthOther->name => [
+            'color' => 'var(--BankTransactionCategory-Health-Color)',
+            'icon' => 'mdi:heart-pulse',
+        ],
+        self::HealthDentist->name => [
+            'color' => 'var(--BankTransactionCategory-Health-Color)',
+            'icon' => 'mdi:tooth-outline',
+        ],
+        self::HealthDoctor->name => [
+            'color' => 'var(--BankTransactionCategory-Health-Color)',
+            'icon' => 'mdi:stethoscope',
+        ],
+        self::HealthMutualInsurance->name => [
+            'color' => 'var(--BankTransactionCategory-Health-Color)',
+            'icon' => 'healthicons:pharmacy',
+        ],
+        self::HealthOptician->name => [
+            'color' => 'var(--BankTransactionCategory-Health-Color)',
+            'icon' => 'mdi:glasses',
+        ],
+        self::HealthPharmacy->name => [
+            'color' => 'var(--BankTransactionCategory-Health-Color)',
+            'icon' => 'mdi:capsule',
+        ],
+        self::HealthHospital->name => [
+            'color' => 'var(--BankTransactionCategory-Health-Color)',
+            'icon' => 'mdi:hospital-building',
+        ],
+    ];
+
+    /**
      * @return BankTransactionCategory[]
      */
     public static function getRootCategories(): array
@@ -301,5 +784,15 @@ enum BankTransactionCategory: string
     public function toTranslation(): TranslatableMessage
     {
         return new TranslatableMessage('app.enum.bank_transaction_category.' . $this->value);
+    }
+
+    public function getIcon(): string
+    {
+        return self::CONFIGURATION[$this->name]['icon'];
+    }
+
+    public function getColor(): string
+    {
+        return self::CONFIGURATION[$this->name]['color'];
     }
 }

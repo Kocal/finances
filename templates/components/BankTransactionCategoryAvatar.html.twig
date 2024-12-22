@@ -1,0 +1,11 @@
+{%- set style_icon = html_cva(
+    base: 'text-white p-2',
+) -%}
+
+<twig:Avatar
+    {{ ... attributes }}
+    style="background-color: {{ category.color }}"
+    title="{{ category.toTranslation|trans }}"
+>
+    <twig:UX:Icon name="{{ category.icon }}" class="{{ style_icon.apply({}) }}" />
+</twig:Avatar>

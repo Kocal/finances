@@ -1,0 +1,10 @@
+{%- set style_avatar = html_cva(
+    base: 'rounded-full size-10',
+) -%}
+
+<div
+    class="{{ style_avatar.apply({}, attributes.render('class'))|tailwind_merge }}"
+    {{ attributes.defaults({}).without('class') }}
+>
+    {%- block content %}{% endblock -%}
+</div>
