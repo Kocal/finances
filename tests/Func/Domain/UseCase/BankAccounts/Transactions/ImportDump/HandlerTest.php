@@ -8,7 +8,7 @@ use App\Application\Model\DataFixtures\BankAccountFixtures;
 use App\Domain\Data\Model\ParsedBankTransaction;
 use App\Domain\Data\ValueObject\BankAccountId;
 use App\Domain\Data\ValueObject\BankId;
-use App\Domain\Data\ValueObject\BankTransactions\UserDump;
+use App\Domain\Data\ValueObject\BankTransaction\UserDump;
 use App\Domain\Data\ValueObject\MimeType;
 use App\Domain\Exception\DumpParsingException;
 use App\Domain\UseCase;

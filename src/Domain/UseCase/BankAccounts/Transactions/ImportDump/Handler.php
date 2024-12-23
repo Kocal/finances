@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\UseCase\BankAccounts\Transactions\ImportDump;
 
-use App\Domain\BankTransactions;
+use App\Domain\BankTransaction;
 use App\Domain\Data\Repository\BankAccountRepository;
 use App\Domain\Exception\BankAccountNotFoundException;
 use App\Domain\Exception\DumpParsingException;
@@ -12,9 +12,9 @@ use App\Domain\Exception\DumpParsingException;
 final readonly class Handler
 {
     public function __construct(
-        private BankTransactions\DumpParsing\Parser $bankTransactionsDumpParser,
+        private BankTransaction\DumpParsing\Parser $bankTransactionsDumpParser,
         private BankAccountRepository $bankAccountRepository,
-        private BankTransactions\ParsedTransactionsImporter $parsedTransactionsImporter,
+        private BankTransaction\ParsedTransactionsImporter $parsedTransactionsImporter,
     ) {
     }
 

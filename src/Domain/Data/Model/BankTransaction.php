@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Domain\Data\Model;
 
 use App\Domain\Data\ValueObject\BankAccountId;
-use App\Domain\Data\ValueObject\BankTransactionCategory;
+use App\Domain\Data\ValueObject\BankTransaction\Category;
+use App\Domain\Data\ValueObject\BankTransaction\Type;
 use App\Domain\Data\ValueObject\BankTransactionId;
-use App\Domain\Data\ValueObject\BankTransactionType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Money\Money;
@@ -31,11 +31,11 @@ class BankTransaction
     #[ORM\Column(type: Types::STRING)]
     private string $label;
 
-    #[ORM\Column(type: Types::STRING, enumType: BankTransactionType::class)]
-    private BankTransactionType $type;
+    #[ORM\Column(type: Types::STRING, enumType: Type::class)]
+    private Type $type;
 
-    #[ORM\Column(type: Types::STRING, enumType: BankTransactionCategory::class)]
-    private BankTransactionCategory $category;
+    #[ORM\Column(type: Types::STRING, enumType: Category::class)]
+    private Category $category;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $date;
@@ -56,8 +56,8 @@ class BankTransaction
         Money $amount,
         string $label,
         \DateTimeImmutable $date,
-        BankTransactionType $type = BankTransactionType::Unknown,
-        BankTransactionCategory $category = BankTransactionCategory::Unknown,
+        Type $type = Type::Unknown,
+        Category $category = Category::Unknown,
     ): self {
         $bankTransaction = new self();
         $bankTransaction->bankAccountId = $bankAccountId;
@@ -97,12 +97,12 @@ class BankTransaction
         return $this->date;
     }
 
-    public function getType(): BankTransactionType
+    public function getType(): Type
     {
         return $this->type;
     }
 
-    public function getCategory(): BankTransactionCategory
+    public function getCategory(): Category
     {
         return $this->category;
     }

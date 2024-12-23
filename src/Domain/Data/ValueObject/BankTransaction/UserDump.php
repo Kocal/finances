@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Data\ValueObject\BankTransactions;
+namespace App\Domain\Data\ValueObject\BankTransaction;
 
 use App\Domain\Data\ValueObject\MimeType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

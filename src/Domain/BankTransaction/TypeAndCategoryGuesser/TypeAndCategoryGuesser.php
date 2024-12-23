@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\BankTransactions\TypeAndCategoryGuesser;
+namespace App\Domain\BankTransaction\TypeAndCategoryGuesser;
 
-use App\Domain\BankTransactions\TypeAndCategoryGuesser\Strategy\Strategy;
-use App\Domain\Data\ValueObject\BankTransactionCategory;
-use App\Domain\Data\ValueObject\BankTransactionType;
+use App\Domain\BankTransaction\TypeAndCategoryGuesser\Strategy\Strategy;
+use App\Domain\Data\ValueObject\BankTransaction\Category;
+use App\Domain\Data\ValueObject\BankTransaction\Type;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 final readonly class TypeAndCategoryGuesser
@@ -21,7 +21,7 @@ final readonly class TypeAndCategoryGuesser
     }
 
     /**
-     * @return array{BankTransactionType, BankTransactionCategory}
+     * @return array{Type, Category}
      */
     public function guess(string $label): array
     {
@@ -32,6 +32,6 @@ final readonly class TypeAndCategoryGuesser
             }
         }
 
-        return [BankTransactionType::Unknown, BankTransactionCategory::Unknown];
+        return [Type::Unknown, Category::Unknown];
     }
 }

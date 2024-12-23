@@ -12,7 +12,7 @@
             </header>
             <section>
                 <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 bg-gray-100 gap-[1px]">
-                    {% for bank_transaction_category in enum('App\\Domain\\Data\\ValueObject\\BankTransactionCategory').cases() %}
+                    {% for bank_transaction_category in enum('App\\Domain\\Data\\ValueObject\\BankTransaction\\Category').cases() %}
                         <li class="flex justify-between gap-x-6 p-5 bg-white hover:bg-gray-50 ">
                             <div class="flex min-w-0 gap-x-4 items-center">
                                 <div class="flex-shrink-0">

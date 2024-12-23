@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Data\ValueObject;
+namespace App\Domain\Data\ValueObject\BankTransaction;
 
 use Symfony\Component\Translation\TranslatableMessage;
 
-enum BankTransactionCategory: string
+enum Category: string
 {
     case Unknown = 'unknown';
 
@@ -622,7 +622,7 @@ enum BankTransactionCategory: string
     ];
 
     /**
-     * @return BankTransactionCategory[]
+     * @return Category[]
      */
     public static function getRootCategories(): array
     {
@@ -644,7 +644,7 @@ enum BankTransactionCategory: string
     }
 
     /**
-     * @return BankTransactionCategory[]
+     * @return Category[]
      */
     public function getSubCategories(): array
     {

@@ -7,7 +7,7 @@ namespace App\Application\Controller\BankAccounts\Transactions\ImportDump;
 use App\Application\CQRS\CommandBus;
 use App\Application\Security\Voter\CanAccessBankAccountVoter;
 use App\Domain\Data\ValueObject\BankAccountId;
-use App\Domain\Data\ValueObject\BankTransactions\UserDump;
+use App\Domain\Data\ValueObject\BankTransaction\UserDump;
 use App\Domain\UseCase\BankAccounts\Transactions\ImportDump\Input;
 use App\Domain\UseCase\BankAccounts\Transactions\ImportDump\Output;
 use Psr\Log\LoggerInterface;

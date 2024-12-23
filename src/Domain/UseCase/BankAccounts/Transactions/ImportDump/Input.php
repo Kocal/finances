@@ -6,7 +6,7 @@ namespace App\Domain\UseCase\BankAccounts\Transactions\ImportDump;
 
 use App\Application\CQRS\Command;
 use App\Domain\Data\ValueObject\BankAccountId;
-use App\Domain\Data\ValueObject\BankTransactions\UserDump;
+use App\Domain\Data\ValueObject\BankTransaction\UserDump;
 
 final readonly class Input implements Command
 {

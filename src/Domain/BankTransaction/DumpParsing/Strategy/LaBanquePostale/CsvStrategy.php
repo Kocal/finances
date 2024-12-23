@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\BankTransactions\DumpParsing\Strategy\LaBanquePostale;
+namespace App\Domain\BankTransaction\DumpParsing\Strategy\LaBanquePostale;
 
-use App\Domain\BankTransactions\DumpParsing\Strategy\Strategy;
+use App\Domain\BankTransaction\DumpParsing\Strategy\Strategy;
 use App\Domain\Data\Model\ParsedBankTransaction;
 use App\Domain\Data\ValueObject\BankId;
-use App\Domain\Data\ValueObject\BankTransactions\UserDump;
+use App\Domain\Data\ValueObject\BankTransaction\UserDump;
 use App\Domain\Exception\DumpParsingException;
 use Money\Currency;
 use Money\Money;

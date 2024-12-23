@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Data\ValueObject;
+namespace App\Domain\Data\ValueObject\BankTransaction;
 
 use Symfony\Component\Translation\TranslatableMessage;
 
-enum BankTransactionType: string
+enum Type: string
 {
     case Unknown = 'unknown';
 
@@ -20,19 +20,19 @@ enum BankTransactionType: string
      */
     private const array CONFIGURATION = [
         self::Unknown->name => [
-            'color' => 'var(--BankTransactionType-Unknown-Color)',
+            'color' => 'var(--Type-Unknown-Color)',
         ],
         self::Essential->name => [
-            'color' => 'var(--BankTransactionType-Essential-Color)',
+            'color' => 'var(--Type-Essential-Color)',
         ],
         self::Pleasure->name => [
-            'color' => 'var(--BankTransactionType-Pleasure-Color)',
+            'color' => 'var(--Type-Pleasure-Color)',
         ],
         self::Saving->name => [
-            'color' => 'var(--BankTransactionType-Saving-Color)',
+            'color' => 'var(--Type-Saving-Color)',
         ],
         self::Extra->name => [
-            'color' => 'var(--BankTransactionType-Extra-Color)',
+            'color' => 'var(--Type-Extra-Color)',
         ],
     ];
 

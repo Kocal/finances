@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\BankTransactions\TypeAndCategoryGuesser\Strategy;
+namespace App\Domain\BankTransaction\TypeAndCategoryGuesser\Strategy;
 
-use App\Domain\Data\ValueObject\BankTransactionCategory as Category;
-use App\Domain\Data\ValueObject\BankTransactionType as Type;
+use App\Domain\Data\ValueObject\BankTransaction\Category;
+use App\Domain\Data\ValueObject\BankTransaction\Type;
 
 final class BuiltInStrategy implements Strategy
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\BankTransactions;
+namespace App\Domain\BankTransaction;
 
-use App\Domain\BankTransactions\TypeAndCategoryGuesser\TypeAndCategoryGuesser;
+use App\Domain\BankTransaction\TypeAndCategoryGuesser\TypeAndCategoryGuesser;
 use App\Domain\Data\Model\BankTransaction;
 use App\Domain\Data\Model\ParsedBankTransaction;
 use App\Domain\Data\Repository\BankTransactionRepository;

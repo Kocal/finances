@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\BankTransactions\DumpParsing;
+namespace App\Domain\BankTransaction\DumpParsing;
 
-use App\Domain\BankTransactions\DumpParsing\Strategy\Strategy;
+use App\Domain\BankTransaction\DumpParsing\Strategy\Strategy;
 use App\Domain\Data\Model\BankAccount;
 use App\Domain\Data\Model\ParsedBankTransaction;
-use App\Domain\Data\ValueObject\BankTransactions\UserDump;
+use App\Domain\Data\ValueObject\BankTransaction\UserDump;
 use App\Domain\Exception\DumpParsingException;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 

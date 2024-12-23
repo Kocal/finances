@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Twig\Components;
 
-use App\Domain\Data\ValueObject\BankTransactionCategory;
+use App\Domain\Data\ValueObject\BankTransaction\Category;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
@@ -12,7 +12,7 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 #[AsTwigComponent]
 final class BankTransactionCategoryAvatar
 {
-    public BankTransactionCategory $category;
+    public Category $category;
 
     /**
      * @param array<string, mixed> $data
@@ -23,7 +23,7 @@ final class BankTransactionCategoryAvatar
     {
         $optionsResolver = new OptionsResolver();
         $optionsResolver->setIgnoreUndefined(true);
-        $optionsResolver->define('category')->required()->allowedTypes(BankTransactionCategory::class);
+        $optionsResolver->define('category')->required()->allowedTypes(Category::class);
 
         return $optionsResolver->resolve($data) + $data;
     }

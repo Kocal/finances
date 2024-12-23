@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Twig\Components;
 
-use App\Domain\Data\ValueObject\BankTransactionType;
+use App\Domain\Data\ValueObject\BankTransaction\Type;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
@@ -12,7 +12,7 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 #[AsTwigComponent]
 final class BankTransactionTypeBadge
 {
-    public BankTransactionType $type;
+    public Type $type;
 
     /**
      * @param array<string, mixed> $data
@@ -23,7 +23,7 @@ final class BankTransactionTypeBadge
     {
         $optionsResolver = new OptionsResolver();
         $optionsResolver->setIgnoreUndefined(true);
-        $optionsResolver->define('type')->required()->allowedTypes(BankTransactionType::class);
+        $optionsResolver->define('type')->required()->allowedTypes(Type::class);
 
         return $optionsResolver->resolve($data) + $data;
     }
