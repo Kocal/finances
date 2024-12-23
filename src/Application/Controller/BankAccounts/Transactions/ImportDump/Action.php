@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Attribute\MapUploadedFile;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/bank_accounts/{bankAccountId}/transactions/import', name: 'app_bank_accounts_transactions_import_dump', methods: ['POST'])]
+#[Route('/bank-accounts/{bankAccountId}/transactions/import', name: 'app_bank_accounts_transactions_import_dump', methods: ['POST'])]
 #[IsGranted('ROLE_USER')]
 #[IsGranted(CanAccessBankAccountVoter::ATTRIBUTE, subject: 'bankAccountId')]
 final class Action extends AbstractController

@@ -50,6 +50,9 @@
             "migrations/.gitignore"
         ]
     },
+    "knplabs/knp-menu-bundle": {
+        "version": "v3.4.2"
+    },
     "kocal/biome-js-bundle": {
         "version": "1.3",
         "recipe": {

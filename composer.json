@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "^2.13.1",
         "doctrine/doctrine-migrations-bundle": "^3.3.1",
         "doctrine/orm": "^3.3",
+        "knplabs/knp-menu-bundle": "^3.4",
         "martin-georgiev/postgresql-for-doctrine": "^2.7",
         "moneyphp/money": "^4.6",
         "phpdocumentor/reflection-docblock": "^5.6",

@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/bank_accounts', name: 'app_bank_accounts_home', methods: ['GET'])]
+#[Route('/bank-accounts', name: 'app_bank_accounts_home', methods: ['GET'])]
 #[IsGranted('ROLE_USER')]
 final class Action extends AbstractController
 {

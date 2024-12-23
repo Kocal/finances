@@ -10,11 +10,16 @@
 
         <twig:block name="navigation">
             <div class="sm:ml-6">
+                {% set menu = knp_menu_get('main') %}
                 <div class="flex space-x-4">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="{{ path('app_home') }}" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">{{ 'app.menu.home'|trans }}</a>
-                    <a href="{{ path('app_bank_accounts_home') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">{{ 'app.menu.bank_accounts'|trans }}</a>
-                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">{{ 'app.menu.income_splitter'|trans }}</a>
+                    {% for menu_item in menu %}
+                        <a
+                            href="{{ menu_item.uri }}"
+                            class="{{ ('rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white' ~ (menu_item is knp_menu_current ? ' bg-gray-900 text-white' : ''))|tailwind_merge }}"
+                        >
+                            {{- menu_item.label|trans -}}
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
         </twig:block>

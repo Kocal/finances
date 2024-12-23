@@ -1,6 +1,6 @@
 app.menu.home: __app.menu.home
 app.menu.bank_accounts: Comptes bancaires
-app.menu.income_splitter: __app.menu.income_splitter
+app.menu.income_splitter: Répartiteur de revenus
 app.enum.bank_transaction_category:
     unknown: Inconnu
     subscription: Abonnement
