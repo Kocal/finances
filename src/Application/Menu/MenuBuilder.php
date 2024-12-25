@@ -23,9 +23,21 @@ final readonly class MenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $menu->addChild('app.menu.bank_accounts', [
-            'route' => 'app_bank_accounts_home',
-        ]);
+        $menu
+            ->addChild('app.menu.bank_accounts', [
+                'route' => 'app_bank_accounts_home',
+            ])
+            ->setExtra('routes', [
+                [
+                    'route' => 'app_bank_accounts_create',
+                ],
+                [
+                    'route' => 'app_bank_accounts_transactions_home',
+                ],
+                [
+                    'route' => 'app_bank_accounts_transactions_import_dump',
+                ],
+            ]);
 
         $menu->addChild('app.menu.income_splitter', [
             'route' => 'app_income_splitter_home',

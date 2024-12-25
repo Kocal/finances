@@ -15,7 +15,7 @@
                     {% for menu_item in menu %}
                         <a
                             href="{{ menu_item.uri }}"
-                            class="{{ ('text-xs sm:text-sm px-3 sm:px-2 py-2 rounded-md font-medium text-gray-300 hover:bg-gray-700 hover:text-white' ~ (menu_item is knp_menu_current ? ' bg-gray-900 text-white' : ''))|tailwind_merge }}"
+                            class="{{ ('text-xs sm:text-sm px-3 sm:px-2 py-2 rounded-md font-medium text-gray-300 hover:bg-gray-700 hover:text-white' ~ (menu_item is knp_menu_current or menu_item is knp_menu_ancestor ? ' bg-gray-900 text-white' : ''))|tailwind_merge }}"
                         >
                             {{- menu_item.label|trans -}}
                         </a>
