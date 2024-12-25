@@ -1,7 +1,5 @@
 <div{{ attributes }}>
-    <!-- component html -->
-
-    <div class="bg-white shadow-lg rounded-lg border">
+     <div class="bg-white shadow-lg rounded-lg border">
         <header class="p-4 flex items-center justify-between border-b bg-slate-100">
             <twig:Button
                 icon="tabler:chevron-left"
@@ -35,7 +33,7 @@
             {% else %}
                 <ul role="list">
                     {% for transaction in computed.transactions %}
-                        <li class="flex justify-between gap-x-6 p-5 hover:bg-gray-50 {% if not loop.last %} border-b border-gray-100{% endif %}">
+                        <li class="flex justify-between gap-x-6 p-5 {% if not loop.last %} border-b border-gray-100{% endif %}">
                             <div class="flex min-w-0 gap-x-4">
                                 <twig:BankTransactionCategoryAvatar category="{{ transaction.category }}" class="flex-none" />
                                 <div class="min-w-0 flex-auto">
