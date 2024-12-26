@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Data\ValueObject;
 
+use App\Domain\Data\EnumTrait;
+
 enum BankId: string implements Id
 {
+    use EnumTrait;
+
     case LA_BANQUE_POSTALE = 'LA_BANQUE_POSTALE';
     case BNP_PARIBAS = 'BNP_PARIBAS';
     case CREDIT_AGRICOLE = 'CREDIT_AGRICOLE';

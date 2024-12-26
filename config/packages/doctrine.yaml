@@ -38,6 +38,7 @@ doctrine:
             string_functions:
                 JSON_GET_TEXT: MartinGeorgiev\Doctrine\ORM\Query\AST\Functions\JsonGetFieldAsText
                 DATE_EXTRACT: MartinGeorgiev\Doctrine\ORM\Query\AST\Functions\DateExtract
+                CAST: MartinGeorgiev\Doctrine\ORM\Query\AST\Functions\Cast
 
 when@test:
     doctrine:

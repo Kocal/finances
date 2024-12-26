@@ -21,8 +21,31 @@ final readonly class Handler
             month: $input->month,
         );
 
+        $totalAmount = $this->bankTransactionRepository->sumExpenses(
+            bankAccountId: $input->bankAccountId,
+            year: $input->year,
+            month: $input->month,
+        );
+
+        $amountByType = $this->bankTransactionRepository->sumExpenses(
+            bankAccountId: $input->bankAccountId,
+            year: $input->year,
+            month: $input->month,
+            group: 'type',
+        );
+
+        $amountByCategory = $this->bankTransactionRepository->sumExpenses(
+            bankAccountId: $input->bankAccountId,
+            year: $input->year,
+            month: $input->month,
+            group: 'category',
+        );
+
         return new Output(
             transactions: $transactions,
+            totalAmount: $totalAmount,
+            amountByType: $amountByType,
+            amountByCategory: $amountByCategory,
         );
     }
 }

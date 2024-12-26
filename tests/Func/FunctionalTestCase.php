@@ -6,13 +6,18 @@ namespace App\Tests\Func;
 
 use App\Application\CQRS\Command;
 use App\Application\CQRS\CommandBus;
+use App\Application\CQRS\Query;
+use App\Application\CQRS\QueryBus;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Clock\Test\ClockSensitiveTrait;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 abstract class FunctionalTestCase extends WebTestCase
 {
+    use ClockSensitiveTrait;
+
     private static KernelBrowser|null $client;
 
     protected function setUp(): void
@@ -106,5 +111,12 @@ abstract class FunctionalTestCase extends WebTestCase
         $commandBus = self::getService(CommandBus::class);
 
         return $commandBus->handle($command);
+    }
+
+    protected function handleQuery(Query $query): mixed
+    {
+        $queryBus = self::getService(QueryBus::class);
+
+        return $queryBus->handle($query);
     }
 }

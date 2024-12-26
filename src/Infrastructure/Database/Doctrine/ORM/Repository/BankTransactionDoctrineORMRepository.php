@@ -9,6 +9,8 @@ use App\Domain\Data\Repository\BankTransactionRepository;
 use App\Domain\Data\ValueObject\BankAccountId;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Money\Currency;
+use Money\Money;
 
 /**
  * @extends ServiceEntityRepository<BankTransaction>
@@ -42,6 +44,59 @@ final class BankTransactionDoctrineORMRepository extends ServiceEntityRepository
         $qb->orderBy('bt.date', 'DESC');
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function sumExpenses(
+        BankAccountId $bankAccountId,
+        ?string $year,
+        ?string $month,
+        ?string $group = null
+    ): array|Money|null {
+        $qb = $this->createQueryBuilder('bt');
+        $qb
+            ->select("JSON_GET_TEXT(bt.amount, 'currency') AS currency")
+            ->addSelect("SUM(CAST(JSON_GET_TEXT(bt.amount, 'amount') AS numeric)) AS amount")
+            ->where('bt.bankAccountId = :bankAccountId')
+            ->andWhere("CAST(JSON_GET_TEXT(bt.amount, 'amount') AS numeric) < 0")
+            ->groupBy('currency')
+            ->setParameter('bankAccountId', $bankAccountId);
+
+        if ($year !== null) {
+            $qb
+                ->andWhere("DATE_EXTRACT('YEAR', bt.date) = :year")
+                ->setParameter('year', $year);
+        }
+
+        if ($month !== null) {
+            $qb
+                ->andWhere("DATE_EXTRACT('MONTH', bt.date) = :month")
+                ->setParameter('month', $month);
+        }
+
+        if ($group === 'category') {
+            $qb->addSelect('bt.category')->addGroupBy('bt.category');
+
+            return array_reduce($qb->getQuery()->getResult(), function (array $carry, array $item): array {
+                $carry[$item['category']->value] = new Money($item['amount'], new Currency($item['currency']));
+
+                return $carry;
+            }, []);
+        } elseif ($group === 'type') {
+            $qb->addSelect('bt.type')->addGroupBy('bt.type');
+
+            return array_reduce($qb->getQuery()->getResult(), function (array $carry, array $item): array {
+                $carry[$item['type']->value] = new Money($item['amount'], new Currency($item['currency']));
+
+                return $carry;
+            }, []);
+        }
+
+        $result = $qb->getQuery()->getArrayResult();
+        if ($result === []) {
+            return null;
+        }
+
+        return new Money($result[0]['amount'], new Currency($result[0]['currency']));
     }
 
     public function hasEquivalent(BankTransaction $bankTransaction): bool

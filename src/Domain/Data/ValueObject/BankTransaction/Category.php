@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Data\ValueObject\BankTransaction;
 
+use App\Domain\Data\EnumTrait;
 use Symfony\Component\Translation\TranslatableMessage;
 
 enum Category: string
 {
+    use EnumTrait;
+
     case Unknown = 'unknown';
 
     case Subscription = 'subscription';
