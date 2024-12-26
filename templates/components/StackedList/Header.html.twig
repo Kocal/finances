@@ -1,0 +1,11 @@
+<header{{ attributes.without('class') }}
+    class="{{ ('p-4 flex items-center justify-between border-b bg-slate-100 ' ~ attributes.render('class'))|tailwind_merge }}"
+>
+    {%- block left %}{% endblock -%}
+
+    <div class="text-lg/6 font-semibold text-gray-900">
+        {%- block content %}{% endblock -%}
+    </div>
+
+    {%- block right %}{% endblock -%}
+</header>

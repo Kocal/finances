@@ -1,0 +1,15 @@
+{% props hoverable = false %}
+{% set style_list_item = html_cva(
+    base: 'bg-white flex justify-between gap-x-6 p-5',
+    variants: {
+        hoverable: {
+            true: 'hover:bg-gray-50',
+        }
+    }
+) %}
+
+<li{{ attributes.without('class') }}
+    class="{{ style_list_item.apply({hoverable}, attributes.render('class'))|tailwind_merge }}"
+>
+    {%- block content -%}{%- endblock -%}
+</li>

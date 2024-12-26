@@ -32,36 +32,36 @@
             </twig:Button>
         </div>
     {% else %}
-        <div class="bg-white shadow-lg rounded-lg border mt-2">
-            <header class="p-4 flex items-center justify-between border-b bg-slate-100">
-                <h2 class="text-lg/6 font-semibold text-gray-900">
+        <twig:StackedList class="mt-2">
+            <twig:block name="header">
+                <twig:StackedList:Header>
                     {{ bank_accounts|length }} compte(s) bancaire.
-                </h2>
-            </header>
-            <section>
-                <ul role="list">
-                    {% for bank_account in bank_accounts %}
-                        <li class="flex justify-between gap-x-6 p-5">
-                            <div class="flex min-w-0 gap-x-4">
-                                <div class="min-w-0 flex-auto">
-                                    <p class="text-sm/6 font-semibold text-gray-900">{{ bank_account.label }}</p>
-                                    <p class="mt-1 truncate text-xs/5 text-gray-500">{{ bank_account.bankId.value }}</p>
-                                </div>
+                </twig:StackedList:Header>
+            </twig:block>
+
+            <twig:StackedList:List>
+                {% for bank_account in bank_accounts %}
+                    <twig:StackedList:ListItem>
+                        <div class="flex min-w-0 gap-x-4">
+                            <div class="min-w-0 flex-auto">
+                                <p class="text-sm/6 font-semibold text-gray-900">{{ bank_account.label }}</p>
+                                <p class="mt-1 truncate text-xs/5 text-gray-500">{{ bank_account.bankId.value }}</p>
                             </div>
-                            <div class="shrink-0 sm:flex sm:flex-col sm:items-end">
-                                <twig:Button
-                                    href="{{ path('app_bank_accounts_transactions_home', {bankAccountId: bank_account.id}) }}"
-                                    icon="tabler:chevron-right"
-                                    iconOnly
-                                    class="p-3 rounded-full"
-                                >
-                                </twig:Button>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </section>
-        </div>
+                        </div>
+                        <div class="shrink-0 sm:flex sm:flex-col sm:items-end">
+                            <twig:Button
+                                href="{{ path('app_bank_accounts_transactions_home', {bankAccountId: bank_account.id}) }}"
+                                icon="tabler:chevron-right"
+                                iconOnly
+                                class="p-3 rounded-full"
+                            >
+                            </twig:Button>
+                        </div>
+                    </twig:StackedList:ListItem>
+                {% endfor %}
+
+            </twig:StackedList:List>
+        </twig:StackedList>
     {% endif %}
 
 {% endblock %}

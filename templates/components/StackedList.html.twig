@@ -1,0 +1,8 @@
+<div{{ attributes.without('class') }}
+    class="{{ ('bg-white shadow-lg rounded-lg border ' ~ attributes.render('class'))|tailwind_merge }}"
+>
+    {%- block header %}{% endblock -%}
+    <section>
+        {%- block content %}{% endblock -%}
+    </section>
+</div>

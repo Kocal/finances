@@ -1,0 +1,6 @@
+<ul{{ attributes.without('class') }}
+    class="{{ ('bg-gray-100 flex flex-col gap-[1px] ' ~ attributes.render('class'))|tailwind_merge }}"
+    role="list"
+>
+    {%- block content %}{% endblock -%}
+</ul>
