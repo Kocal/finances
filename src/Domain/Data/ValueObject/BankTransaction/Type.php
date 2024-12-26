@@ -20,19 +20,19 @@ enum Type: string
      */
     private const array CONFIGURATION = [
         self::Unknown->name => [
-            'color' => 'var(--Type-Unknown-Color)',
+            'color' => 'var(--BankTransactionType-Unknown-Color)',
         ],
         self::Essential->name => [
-            'color' => 'var(--Type-Essential-Color)',
+            'color' => 'var(--BankTransactionType-Essential-Color)',
         ],
         self::Pleasure->name => [
-            'color' => 'var(--Type-Pleasure-Color)',
+            'color' => 'var(--BankTransactionType-Pleasure-Color)',
         ],
         self::Saving->name => [
-            'color' => 'var(--Type-Saving-Color)',
+            'color' => 'var(--BankTransactionType-Saving-Color)',
         ],
         self::Extra->name => [
-            'color' => 'var(--Type-Extra-Color)',
+            'color' => 'var(--BankTransactionType-Extra-Color)',
         ],
     ];
 

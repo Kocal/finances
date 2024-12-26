@@ -43,9 +43,9 @@
 		--BankTransactionCategory-Health-Color: #ef5c5c;
 
 		--BankTransactionType-Unknown-Color: #a5a5a5;
-		--BankTransactionType-Essential-Color: #0fbd0f;
-		--BankTransactionType-Pleasure-Color: #3784ea;
+		--BankTransactionType-Essential-Color: #b80b0b;
+		--BankTransactionType-Pleasure-Color: #218f58;
 		--BankTransactionType-Saving-Color: #8a5630;
-		--BankTransactionType-Extra-Color: #fa4fa5;
+		--BankTransactionType-Extra-Color: #2e7fec;
 	}
 }
