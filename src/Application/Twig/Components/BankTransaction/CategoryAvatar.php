@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Twig\Components;
+namespace App\Application\Twig\Components\BankTransaction;
 
 use App\Domain\Data\ValueObject\BankTransaction\Category;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,7 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsTwigComponent]
-final class BankTransactionCategoryAvatar
+final class CategoryAvatar
 {
     public Category $category;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Twig\Components;
+namespace App\Application\Twig\Components\BankTransaction;
 
 use App\Application\CQRS\QueryBus;
 use App\Domain\Data\Model\BankTransaction;
@@ -20,7 +20,7 @@ use Symfony\UX\TwigComponent\Attribute\PostMount;
 use function Symfony\Component\Clock\now;
 
 #[AsLiveComponent]
-final class BankTransactionsVisualizer
+final class UserTransactionsVisualizer
 {
     use DefaultActionTrait;
     use ComponentToolsTrait;
