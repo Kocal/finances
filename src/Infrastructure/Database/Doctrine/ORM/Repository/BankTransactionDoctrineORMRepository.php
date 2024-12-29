@@ -7,6 +7,7 @@ namespace App\Infrastructure\Database\Doctrine\ORM\Repository;
 use App\Domain\Data\Model\BankTransaction;
 use App\Domain\Data\Repository\BankTransactionRepository;
 use App\Domain\Data\ValueObject\BankAccountId;
+use App\Domain\Data\ValueObject\BankTransaction\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Money\Currency;
@@ -74,10 +75,24 @@ final class BankTransactionDoctrineORMRepository extends ServiceEntityRepository
         }
 
         if ($group === 'category') {
-            $qb->addSelect('bt.category')->addGroupBy('bt.category');
+            $caseSql = 'CASE';
+            foreach (Category::cases() as $category) {
+                $subCategories = $category->getSubCategories();
+                if ($subCategories !== []) {
+                    $caseSql .= sprintf(
+                        " WHEN bt.category IN ('%s', '%s') THEN '%s'",
+                        $category->value,
+                        implode("', '", array_map(fn (Category $subCategory) => $subCategory->value, $subCategories)),
+                        $category->value,
+                    );
+                }
+            }
+            $caseSql .= ' ELSE bt.category END';
+
+            $qb->addSelect($caseSql . ' AS category')->addGroupBy('category');
 
             return array_reduce($qb->getQuery()->getResult(), function (array $carry, array $item): array {
-                $carry[$item['category']->value] = new Money($item['amount'], new Currency($item['currency']));
+                $carry[$item['category']] = new Money($item['amount'], new Currency($item['currency']));
 
                 return $carry;
             }, []);

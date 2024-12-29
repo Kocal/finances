@@ -100,9 +100,9 @@ final class HandlerTest extends FunctionalTestCase
             Type::Essential->value => Money::EUR(-194_11),
         ], $output->amountByType);
         self::assertEquals([
-            Category::TransportTrainTicket->value => Money::EUR(-1_00),
-            Category::LeisureRestaurant->value => Money::EUR(-50_00),
-            Category::BankLoanRepayment->value => Money::EUR(-194_11),
-        ], $output->amountByCategory);
+            Category::Transport->value => Money::EUR(-1_00),
+            Category::Leisure->value => Money::EUR(-50_00),
+            Category::Bank->value => Money::EUR(-194_11),
+        ], $output->amountByCategory, 'Amount should be merged and categorized by the main category.');
     }
 }
