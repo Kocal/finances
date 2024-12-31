@@ -60,6 +60,7 @@ final class BankTransactionDoctrineORMRepository extends ServiceEntityRepository
             ->where('bt.bankAccountId = :bankAccountId')
             ->andWhere("CAST(JSON_GET_TEXT(bt.amount, 'amount') AS numeric) < 0")
             ->groupBy('currency')
+            ->orderBy('amount', 'DESC')
             ->setParameter('bankAccountId', $bankAccountId);
 
         if ($year !== null) {
