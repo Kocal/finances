@@ -34,7 +34,7 @@
 		--BankTransactionCategory-Transport-Color: #2dcacd;
 		--BankTransactionCategory-Bank-Color: #a36c45;
 		--BankTransactionCategory-Professional-Color: #9c4bb8;
-		--BankTransactionCategory-Various-Color: #70c6d4;
+		--BankTransactionCategory-Various-Color: #6cc0cd;
 		--BankTransactionCategory-AestheticAndCare-Color: #e67ab0;
 		--BankTransactionCategory-TaxesAndDuties-Color: #7fbfeb;
 		--BankTransactionCategory-Housing-Color: #466ff1;
@@ -43,9 +43,9 @@
 		--BankTransactionCategory-Health-Color: #ef5c5c;
 
 		--BankTransactionType-Unknown-Color: #a5a5a5;
-		--BankTransactionType-Essential-Color: #b80b0b;
-		--BankTransactionType-Pleasure-Color: #218f58;
-		--BankTransactionType-Saving-Color: #8a5630;
-		--BankTransactionType-Extra-Color: #2e7fec;
+		--BankTransactionType-Essential-Color: #df0943;
+		--BankTransactionType-Pleasure-Color: #0dc32c;
+		--BankTransactionType-Saving-Color: #975a2f;
+		--BankTransactionType-Extra-Color: #325ce1;
 	}
 }

@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Domain\Data\ValueObject\BankTransaction;
 
 use App\Domain\Data\EnumTrait;
-use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatableInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-enum Type: string
+enum Type: string implements TranslatableInterface
 {
     use EnumTrait;
 
@@ -39,13 +40,13 @@ enum Type: string
         ],
     ];
 
-    public function toTranslation(): TranslatableMessage
-    {
-        return new TranslatableMessage('app.enum.bank_transaction_type.' . $this->value);
-    }
-
     public function getColor(): string
     {
         return self::CONFIGURATION[$this->name]['color'];
+    }
+
+    public function trans(TranslatorInterface $translator, ?string $locale = null): string
+    {
+        return $translator->trans('app.enum.bank_transaction_type.' . $this->value, locale: $locale);
     }
 }
