@@ -1,0 +1,7 @@
+<div{{ attributes }}>
+    <div class="text-md/6 font-semibold text-gray-900 text-center mb-2">Catégories</div>
+    {{- render_chart(computed.chart, {
+        'data-controller': 'bank-transactions--chart-amount-by-category',
+        style: 'max-height: 95%;'
+    }) -}}
+</div>

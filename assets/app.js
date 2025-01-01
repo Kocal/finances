@@ -7,4 +7,25 @@ import "./bootstrap.js";
  */
 import "./styles/app.css";
 
-console.log("This log comes from assets/app.js - welcome to AssetMapper! 🎉");
+document.addEventListener("chartjs:init", (event) => {
+	const Chart = event.detail.Chart;
+
+	Chart.register({
+		id: "css-variables",
+		beforeInit(chart, args, options) {
+			const computedStyle = window.getComputedStyle(document.documentElement);
+
+			for (const dataset of chart.data.datasets) {
+				if (dataset.backgroundColor) {
+					dataset.backgroundColor = dataset.backgroundColor.map((color) => {
+						if (color.startsWith("var(--")) {
+							return computedStyle.getPropertyValue(color.slice(4, -1));
+						}
+
+						return color;
+					});
+				}
+			}
+		},
+	});
+});

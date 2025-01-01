@@ -1,7 +1,10 @@
-<div{{ attributes }}>
+<div
+    class="{{ ('grid gap-1 ' ~ attributes.render('class'))|tailwind_merge }}"
+    {{ attributes.defaults({}).without('class') }}
+>
     {% set transactions = this.transactions %}
 
-    <twig:StackedList>
+    <twig:StackedList class="w-lg">
         <twig:block name="header">
             <twig:StackedList:Header>
                 <twig:block name="left">
@@ -38,6 +41,11 @@
             </div>
         {% else %}
             <twig:StackedList:List>
+                <twig:StackedList:ListItem class="grid grid-cols-3 gap-2">
+                    <twig:BankTransaction:ChartAmountByType class="col-span-1" amountByType="{{ amountByType }}" style="max-height: 250px"/>
+                    <twig:BankTransaction:ChartAmountByCategory class="col-span-2" amountByCategory="{{ amountByCategory }}" style="max-height: 250px"  />
+                </twig:StackedList:ListItem>
+
                 {% for transaction in transactions %}
                     <twig:StackedList:ListItem hoverable>
                         <div class="flex min-w-0 gap-x-4">
