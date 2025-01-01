@@ -57,20 +57,21 @@ final class UserTransactionsVisualizer
     public function postMount(): void
     {
         $this->currentMonth ??= now();
+        $this->currentMonth = $this->currentMonth->setTime(0, 0, 0);
         $this->updateInternalState();
     }
 
     #[LiveAction]
     public function prevMonth(): void
     {
-        $this->currentMonth = $this->currentMonth->modify('first day of last month');
+        $this->currentMonth = $this->currentMonth->modify('first day of this month')->modify('-1 day')->modify('first day of this month')->setTime(0, 0, 0);
         $this->updateInternalState();
     }
 
     #[LiveAction]
     public function nextMonth(): void
     {
-        $this->currentMonth = $this->currentMonth->modify('first day of next month');
+        $this->currentMonth = $this->currentMonth->modify('first day of next month')->setTime(0, 0, 0);
         $this->updateInternalState();
     }
 
